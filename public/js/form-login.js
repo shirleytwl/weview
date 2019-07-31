@@ -26,7 +26,7 @@ const login = (username,password) => {
 	let loginReq = new XMLHttpRequest();   // new HttpRequest instance
 	loginReq.addEventListener("load", function(){
 		if (this.status === 200) {
-			console.log("logged in");
+			window.location.href = "/";
 		}
 		else if (this.status === 204) {
 			console.log("Invalid username/password");

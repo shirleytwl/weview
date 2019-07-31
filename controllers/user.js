@@ -15,7 +15,7 @@ module.exports = (db) => {
         db.user.addUser(username, password,(error, callback) => {
             if (callback) {
                 res.cookie('logged_in', sha256(callback[0].username+"logged in"+SALT));
-                res.cookie('id', callback[0].id);
+                res.cookie('username', callback[0].username);
                 res.status(200).send();
             }
             else {
@@ -29,7 +29,7 @@ module.exports = (db) => {
         db.user.loginUser(username, password,(error, callback) => {
             if (callback) {
                 res.cookie('logged_in', sha256(callback[0].username + "logged in" + SALT));
-                res.cookie('id', callback[0].id);
+                res.cookie('username', callback[0].username);
                 res.status(200).send();
             }
             else {

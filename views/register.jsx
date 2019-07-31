@@ -1,13 +1,14 @@
 var React = require("react");
 var DefaultLayout = require("./layouts/default");
+var RegisterForm = require("./components/form-register");
 
 class Home extends React.Component {
 	render() {
 		return (
-			<DefaultLayout username={this.props.username}>
+			<DefaultLayout>
 				<div className="row">
 					<div className="col-4 offset-4">
-						<p>placeholder</p>
+						<RegisterForm/>
 					</div>
 				</div>
 			</DefaultLayout>

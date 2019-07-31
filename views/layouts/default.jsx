@@ -2,6 +2,29 @@ var React = require('react');
 
 class DefaultLayout extends React.Component {
 	render() {
+		let userNavItems = "";
+
+		if (this.props.username) {
+			userNavItems = (
+				<React.Fragment>
+					<li className="nav-item">
+						<a className="nav-link" href="/logout">Log out</a>
+					</li>
+				</React.Fragment>
+			);
+		}
+		else {
+			userNavItems = (
+				<React.Fragment>
+					<li className="nav-item">
+						<a className="nav-link" href="/login">Login</a>
+					</li>
+					<li className="nav-item">
+						<a className="nav-link" href="/register">Register</a>
+					</li>
+				</React.Fragment>
+			);
+		}
 		return (
 			<html>
 			<head>
@@ -12,12 +35,21 @@ class DefaultLayout extends React.Component {
 				<link rel="stylesheet" type="text/css" href="/css/style.css"/>
 			</head>
 			<body>
-			<nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark justify-content-center">
+			<nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
 				<a className="navbar-brand" href="/">
 					<img src="https://www.shareicon.net/data/256x256/2016/07/09/118682_video_512x512.png" width="30" height="30"
 					     className="d-inline-block align-top mr-3" alt=""/>
 					WeView
 				</a>
+				<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span className="navbar-toggler-icon"/>
+				</button>
+				<div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+					<ul className="navbar-nav">
+						{userNavItems}
+					</ul>
+				</div>
 			</nav>
 			<div className="container-fluid my-5">
 				{this.props.children}
