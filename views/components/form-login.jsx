@@ -5,19 +5,18 @@ class LoginForm extends React.Component {
 		return (
 			<React.Fragment>
 				<form id="form-login">
-					<div className="form-group row">
-						<div className="col-sm-12">
-							<input type="text" name="username" className="form-control form-username" placeholder="Username" autoComplete="username"/>
+					<div className="row">
+						<div className="input-field col s12">
+							<input type="text" className="form-username validate"/>
+								<label htmlFor="email">Username</label>
 						</div>
-					</div>
-					<div className="form-group row">
-						<div className="col-sm-12">
-							<input type="password" name="password" className="form-control form-password" placeholder="Password" autoComplete="current-password"
-							/>
+						<div className="input-field col s12">
+							<input type="password" className="form-password validate"/>
+								<label htmlFor="password">Password</label>
 						</div>
-					</div>
-					<div className="buttons text-center">
-						<button type="submit" className="btn btn-lg btn-primary btn-submit">Login</button>
+						<div className="center-align">
+							<button className="waves-effect waves-light btn btn-submit">Login</button>
+						</div>
 					</div>
 				</form>
 				<script src="/js/form-login.js"/>

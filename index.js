@@ -8,12 +8,15 @@ const app = express();
 
 // Set up middleware
 app.use(methodOverride('_method'));
-app.use(express.static(__dirname+'/public'));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
+app.use(express.static(__dirname+'/public'));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+app.use('/materialize-css', express.static(__dirname + '/node_modules/materialize-css/dist/'));
+app.use('/materialize-stepper', express.static(__dirname + '/node_modules/materialize-stepper/dist/'));
 
 // Set react-views to be the default view engine
 const reactEngine = require('express-react-views').createEngine();

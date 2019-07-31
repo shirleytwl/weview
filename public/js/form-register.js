@@ -1,26 +1,16 @@
-let regButton = document.querySelector('#form-register .btn-submit');
-let regFormUsername = document.querySelector('#form-register .form-username');
-let regFormPassword = document.querySelector('#form-register .form-password');
+let rfButton = document.querySelector('#form-register .btn-submit');
+let rfUsername = document.querySelector('#form-register .form-username');
+let rfPassword = document.querySelector('#form-register .form-password');
 
-regButton.addEventListener('click', function(event){
+rfButton.addEventListener('click', function(event){
 	event.preventDefault();
-	let formValidated = true;
-	if (regFormUsername.value.trim() === "") {
-		console.log("missing username");
-		formValidated = false;
+	if (rfUsername.value.trim() === "" || rfPassword.value === "") {
+		M.toast({html: 'Please fill in all fields',displayLength:1000});
 	}
-	if (regFormPassword.value === "") {
-		console.log("missing password");
-		formValidated = false;
-	}
-
-	if (formValidated) {
-		register(regFormUsername.value.trim(),regFormPassword.value);
+	else {
+		register(rfUsername.value.trim(),rfPassword.value);
 	}
 });
-
-
-
 
 const register = (username,password) => {
 	let usernameData = { username };
@@ -36,10 +26,10 @@ const register = (username,password) => {
 						window.location.href = "/";
 					}
 					else if (this.status === 204) {
-						console.log("There is issue connecting to the server");
+						M.toast({html: 'There is issue connecting to the server',displayLength:1500});
 					}
 					else {
-						console.log("There is issue making the HTTP Request.");
+						M.toast({html: 'There is issue making the HTTP Request',displayLength:1500});
 					}
 				});
 				registerReq.open("POST", "/register");
@@ -47,11 +37,11 @@ const register = (username,password) => {
 				registerReq.send(JSON.stringify(userData));
 			}
 			else {
-				console.log("there is existing");
+				M.toast({html: 'Please try something else as the username is in use',displayLength:1500});
 			}
 		}
 		else {
-			console.log("There is issue making the HTTP Request.");
+			M.toast({html: 'There is issue making the HTTP Request',displayLength:1500});
 		}
 	});
 

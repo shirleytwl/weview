@@ -1,21 +1,14 @@
 
-let loginButton = document.querySelector('#form-login .btn-submit');
-let loginFormUsername = document.querySelector('#form-login .form-username');
-let loginFormPassword = document.querySelector('#form-login .form-password');
-loginButton.addEventListener('click', function(event){
+let lfButton = document.querySelector('#form-login .btn-submit');
+let lfUsername = document.querySelector('#form-login .form-username');
+let lfPassword = document.querySelector('#form-login .form-password');
+lfButton.addEventListener('click', function(event){
 	event.preventDefault();
-	let formValidated = true;
-	if (loginFormUsername.value.trim() === "") {
-		console.log("missing username");
-		formValidated = false;
+	if (lfUsername.value.trim() === "" || lfPassword.value === "") {
+		M.toast({html: 'Please fill in all fields',displayLength:1500});
 	}
-	if (loginFormPassword.value === "") {
-		console.log("missing password");
-		formValidated = false;
-	}
-
-	if (formValidated) {
-		login(loginFormUsername.value.trim(),loginFormPassword.value);
+	else {
+		login(lfUsername.value.trim(),lfPassword.value);
 	}
 });
 
@@ -30,9 +23,10 @@ const login = (username,password) => {
 		}
 		else if (this.status === 204) {
 			console.log("Invalid username/password");
+			M.toast({html: 'Invalid username/password',displayLength:1500});
 		}
 		else {
-			console.log("There is issue making the HTTP Request.");
+			M.toast({html: 'here is issue making the HTTP Request.',displayLength:1500});
 		}
 	});
 	loginReq.open("POST", "/login");

@@ -6,9 +6,11 @@ class Home extends React.Component {
 	render() {
 		return (
 			<DefaultLayout>
-				<div className="row">
-					<div className="col-4 offset-4">
-						<RegisterForm/>
+				<div className="section">
+					<div className="row">
+						<div className="col s12 m4 offset-m4">
+							<RegisterForm/>
+						</div>
 					</div>
 				</div>
 			</DefaultLayout>
