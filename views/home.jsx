@@ -1,10 +1,13 @@
 var React = require("react");
 var DefaultLayout = require("./layouts/default");
 var ReviewModal = require("./modal-review");
+var Category = require("./components/category");
 
 class Home extends React.Component {
 	render() {
-		// console.log(this.props.categories.map()
+		let categories =this.props.categories.map((category,index) => {
+			return (<Category category={category}/>)
+		});
 		return (
 			<DefaultLayout username={this.props.username}>
 				<div className="section">
@@ -13,7 +16,7 @@ class Home extends React.Component {
 							<ReviewModal/>
 						</div>
 						<div className="col s12 m8">
-							<p>placeholder text</p>
+							{categories}
 						</div>
 					</div>
 				</div>

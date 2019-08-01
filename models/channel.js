@@ -53,8 +53,23 @@ module.exports = (dbPoolInstance) => {
     };
 
     let getCategories = (callback) => {
-        let query = 'SELECT name FROM Categories';
+        let query = 'SELECT * FROM Categories';
         dbPoolInstance.query(query, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
+        let getChannelByCategories = (category_id,callback) => {
+            let query = 'SELECT * FROM Channel_Categories INNER JOIN channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id;'
+            let values = [category_id];
+            dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
                 callback(error, null);
             } else {
@@ -71,6 +86,7 @@ module.exports = (dbPoolInstance) => {
         addChannel,
         addCategory,
         addChannelCategory,
-        getCategories
+        getCategories,
+        getChannelByCategories
     };
 };
