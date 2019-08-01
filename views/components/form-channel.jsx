@@ -4,10 +4,10 @@ class ChannelForm extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<ul className="stepper linear horizontal" id="horizontal">
+				<ul className="stepper linear horizontal" id="channel-review-form">
 					<li className="step">
 						<div className="step-title waves-effect waves-dark">Retrieve Channel</div>
-						<div className="step-content">
+						<div className="step-content step-1">
 							<div className="row">
 								<div className="input-field col s12">
 									<input id="channel_id" name="channel_id" type="text" className="form-channel validate" required/>
@@ -20,34 +20,56 @@ class ChannelForm extends React.Component {
 						</div>
 					</li>
 					<li className="step">
-						<div className="step-title waves-effect waves-dark" data-feedback="checkChannel">Step 22</div>
-						<div className="step-content">
+						<div className="step-title waves-effect waves-dark">Write Review</div>
+						<div className="step-content step-2">
+							<div className="row">
+								<div className="col s2">
+									<img className="responsive-img channel-thumbnail"/>
+								</div>
+								<div className="col s10">
+									<h5 className="channel-name"></h5>
+									<div className="channel-categories"></div>
+								</div>
+							</div>
 							<div className="row">
 								<div className="input-field col s12">
-									<input id="horizontal_password" name="horizontal_password" type="password"
-									       className="validate" required/>
-										<label htmlFor="horizontal_password">Your password</label>
+									<textarea id="channel_review" name="channel_review" className="materialize-textarea validate" required></textarea>
+									<label htmlFor="channel_review">Write your review here</label>
 								</div>
 							</div>
 							<div className="step-actions">
-								<button className="waves-effect waves-dark btn blue next-step"
-								        data-feedback="someFunction">CONTINUE
-								</button>
+								<button className="waves-effect waves-dark btn blue next-step" data-feedback="formOverview">Next</button>
 								<button className="waves-effect waves-dark btn-flat previous-step">BACK</button>
 							</div>
 						</div>
 					</li>
 					<li className="step">
-						<div className="step-title waves-effect waves-dark">Step 3</div>
-						<div className="step-content">
-							Finish!
+						<div className="step-title waves-effect waves-dark">Confirm review</div>
+						<div className="step-content step-3">
+							<div className="row">
+								<div className="col s2">
+									<img className="responsive-img channel-thumbnail"/>
+								</div>
+								<div className="col s10">
+									<h5 className="channel-name"></h5>
+									<div className="channel-categories"></div>
+								</div>
+							</div>
+							<div className="row">
+								<div className="input-field col s12">
+									<textarea id="overview_review" name="overview_review" className="materialize-textarea validate" disabled></textarea>
+									<label id="overview_review_label" htmlFor="overview_review">Review</label>
+								</div>
+							</div>
 							<div className="step-actions">
-								<button className="waves-effect waves-dark btn blue" type="submit">SUBMIT</button>
+								<button className="btn-submit waves-effect waves-dark btn blue">Confirm &amp; Submit</button>
+								<button className="waves-effect waves-dark btn-flat previous-step">BACK</button>
 							</div>
 						</div>
 					</li>
 				</ul>
-				<script src="/js/form-channel.js"/>
+				<script src="/js/project/api-key.js"/>
+				<script src="/js/project/form-channel.js"/>
 			</React.Fragment>
 		);
 	}

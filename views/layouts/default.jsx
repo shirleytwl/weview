@@ -31,9 +31,9 @@ class DefaultLayout extends React.Component {
 				<title>WeView</title>
 				<meta charSet="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
 				<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-				<link rel="stylesheet" type="text/css" href="/materialize-css/css/materialize.min.css"/>
-				<link rel="stylesheet" type="text/css" href="/materialize-stepper/css/mstepper.min.css"/>
-				<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+				<link rel="stylesheet" type="text/css" href="/css/materialize.min.css"/>
+				<link rel="stylesheet" type="text/css" href="/css/mstepper.min.css"/>
+				<link rel="stylesheet" type="text/css" href="/css/project/style.css"/>
 			</head>
 			<body>
 				<div className="navbar-fixed">
@@ -61,11 +61,10 @@ class DefaultLayout extends React.Component {
 				<div className="container">
 					{this.props.children}
 				</div>
-
-				<script src="/jquery/jquery.min.js"/>
-				<script src="/materialize-css/js/materialize.min.js"/>
-				<script src="/materialize-stepper/js/mstepper.min.js"/>
-				<script src="/js/script.js"/>
+				<script src="/js/jquery.min.js"/>
+				<script src="/js/materialize.min.js"/>
+				<script src="/js/mstepper.min.js"/>
+				<script src="/js/project/script.js"/>
 			</body>
 			</html>
 		);

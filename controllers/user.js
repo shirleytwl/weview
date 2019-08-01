@@ -16,6 +16,7 @@ module.exports = (db) => {
             if (callback) {
                 res.cookie('logged_in', sha256(callback[0].username+"logged in"+SALT));
                 res.cookie('username', callback[0].username);
+                res.cookie('userid', callback[0].id);
                 res.status(200).send();
             }
             else {
@@ -30,6 +31,7 @@ module.exports = (db) => {
             if (callback) {
                 res.cookie('logged_in', sha256(callback[0].username + "logged in" + SALT));
                 res.cookie('username', callback[0].username);
+                res.cookie('userid', callback[0].id);
                 res.status(200).send();
             }
             else {

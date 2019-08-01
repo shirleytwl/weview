@@ -6,7 +6,15 @@ module.exports = (db) => {
     let homePageCC = (req, res) => {
         let loginSession = req.cookies["logged_in"];
         let username = req.cookies["username"];
-        (!loginSession || loginSession === sha256("logged out" + SALT)) ? res.render("home", {username: null}): res.render('home',{username});
+        db.channel.getCategories((error, callback) => {
+            let categories = callback;
+            if (!loginSession || loginSession === sha256("logged out" + SALT)) {
+                res.render("home", {username: null,categories})
+            } else {
+                res.render('home', {username,categories});
+            }
+        });
+
     };
 
     let registerPageCC = (req, res) => {
@@ -22,6 +30,7 @@ module.exports = (db) => {
     let logoutPageCC = (req, res) => {
         res.cookie('logged_in', sha256("logged out" + SALT));
         res.cookie('username', "");
+        res.cookie('userid', "");
         res.redirect('/');
     };
 

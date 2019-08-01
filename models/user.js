@@ -26,7 +26,7 @@ module.exports = (dbPoolInstance) => {
 
     let addUser = (username,password, callback) => {
 
-        let query = 'INSERT INTO Users(username,password) VALUES($1,$2) RETURNING username';
+        let query = 'INSERT INTO Users(username,password) VALUES($1,$2) RETURNING username, id';
         let values = [username,password];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
@@ -43,7 +43,7 @@ module.exports = (dbPoolInstance) => {
 
     let loginUser = (username,password, callback) => {
 
-        let query = 'SELECT username FROM Users WHERE LOWER(username) = $1 AND password = $2';
+        let query = 'SELECT username,id FROM Users WHERE LOWER(username) = $1 AND password = $2';
         let values = [username.toLowerCase(), password];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {

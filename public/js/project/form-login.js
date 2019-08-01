@@ -26,7 +26,7 @@ const login = (username,password) => {
 			M.toast({html: 'Invalid username/password',displayLength:1500});
 		}
 		else {
-			M.toast({html: 'here is issue making the HTTP Request.',displayLength:1500});
+			M.toast({html: 'There is issue making the HTTP Request.',displayLength:1500});
 		}
 	});
 	loginReq.open("POST", "/login");

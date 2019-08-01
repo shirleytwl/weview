@@ -19,7 +19,7 @@ class LoginForm extends React.Component {
 						</div>
 					</div>
 				</form>
-				<script src="/js/form-login.js"/>
+				<script src="/js/project/form-login.js"/>
 			</React.Fragment>
 		);
 	}

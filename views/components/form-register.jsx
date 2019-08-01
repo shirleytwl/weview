@@ -19,7 +19,7 @@ class RegisterForm extends React.Component {
 						</div>
 					</div>
 				</form>
-				<script src="/js/form-register.js"/>
+				<script src="/js/project/form-register.js"/>
 			</React.Fragment>
 		);
 	}

@@ -45,8 +45,12 @@ pool.on('error', function (err) {
  * ===========================================
  */
 const allUserModelsFunction = require('./models/user');
+const allChannelModelsFunction = require('./models/channel');
+const allReviewModelsFunction = require('./models/review');
 
 const userModelsObject = allUserModelsFunction(pool);
+const channelModelsObject = allChannelModelsFunction(pool);
+const reviewModelsObject = allReviewModelsFunction(pool);
 
 
 /**
@@ -59,5 +63,7 @@ module.exports = {
 		return pool.query(text, params, callback);
 	},
 	pool: pool,
-	user: userModelsObject
+	user: userModelsObject,
+	channel: channelModelsObject,
+	review: reviewModelsObject
 };

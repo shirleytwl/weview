@@ -7,7 +7,9 @@ CREATE TABLE Users (
 CREATE TABLE Channels (
     id SERIAL PRIMARY KEY,
     name VARCHAR(32),
-    youtube_id VARCHAR(32)
+    youtube_id VARCHAR(32),
+    thumbnail_url TEXT,
+    link TEXT
 );
 
 CREATE TABLE Reviews (

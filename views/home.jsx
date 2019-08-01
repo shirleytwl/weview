@@ -4,6 +4,7 @@ var ReviewModal = require("./modal-review");
 
 class Home extends React.Component {
 	render() {
+		// console.log(this.props.categories.map()
 		return (
 			<DefaultLayout username={this.props.username}>
 				<div className="section">
