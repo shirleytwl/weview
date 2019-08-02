@@ -1,0 +1,7 @@
+# Dependency directory
+node_modules
+
+# Google API Key
+api-key.js
+
+.floo*
