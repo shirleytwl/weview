@@ -27,6 +27,9 @@ module.exports = (db) => {
                     });
                 });
             }
+            else {
+                res.render("home", {username: null, categories:null})
+            }
         });
 
     };
