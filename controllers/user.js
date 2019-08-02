@@ -24,6 +24,29 @@ module.exports = (db) => {
             }
         });
     };
+    let showUserCC = (req, res) => {
+        let loginSession = req.cookies["logged_in"];
+        let username = req.cookies["username"];
+        let data = {};
+        if (!loginSession || loginSession === sha256("logged out" + SALT)) {
+            data = { username: null };
+        }
+        else {
+            data = { username };
+        }
+        let user = req.params.user;
+        db.user.getUser(user,(error, callback) => {
+            if (callback) {
+                data.user = callback;
+                db.review.getReviewsByUser(data.user.id,(error, callback) => {
+                    if (callback) {
+                        data.user.reviews = callback;
+                        res.render('user', {data});
+                    }
+                });
+            }
+        });
+    };
     let loginCC = (req, res) => {
         let username = req.body.username;
         let password = sha256(SALT+req.body.password);
@@ -49,6 +72,7 @@ module.exports = (db) => {
     return {
         checkUser: checkUserCC,
         addUser: addUserCC,
+        showUser: showUserCC,
         login: loginCC
     };
 

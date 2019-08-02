@@ -58,9 +58,27 @@ module.exports = (dbPoolInstance) => {
         });
     };
 
+    let getUser = (username, callback) => {
+
+        let query = 'SELECT username,id, TO_CHAR(date_joined :: DATE, \'dd Month yyyy\') AS date_joined FROM Users WHERE LOWER(username) = $1';
+        let values = [username.toLowerCase()];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows[0]);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
+
     return {
         checkUser,
         addUser,
-	    loginUser
+	    loginUser,
+        getUser
     };
 };
