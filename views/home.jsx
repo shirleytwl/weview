@@ -7,7 +7,7 @@ class Home extends React.Component {
 	render() {
 		let categories = "No channel reviews";
 		console.log(this.props.categories);
-		if (this.props.categories === null) {
+		if (this.props.categories) {
 			categories = this.props.categories.map((category) => {
 				return (<Category category={category}/>)
 			});
