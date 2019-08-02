@@ -66,10 +66,43 @@ module.exports = (dbPoolInstance) => {
             }
         });
     };
-        let getChannelByCategories = (category_id,callback) => {
-            let query = 'SELECT * FROM Channel_Categories INNER JOIN channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id;'
-            let values = [category_id];
-            dbPoolInstance.query(query, values, (error, queryResult) => {
+
+    let getChannel = (id, callback) => {
+        let query = 'SELECT * FROM Channels WHERE youtube_id = $1';
+        let values = [id];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
+
+    let getChannelsByCategory = (category_id,callback) => {
+        let query = 'SELECT * FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id';
+        let values = [category_id];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
+
+    let getCategoriesByChannel = (channel_id,callback) => {
+        let query = 'SELECT * FROM Channel_Categories INNER JOIN Categories ON (Categories.id=Channel_Categories.category_id) WHERE $1=Channel_Categories.channel_id';
+        let values = [channel_id];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
                 callback(error, null);
             } else {
@@ -87,6 +120,8 @@ module.exports = (dbPoolInstance) => {
         addCategory,
         addChannelCategory,
         getCategories,
-        getChannelByCategories
+        getChannel,
+        getChannelsByCategory,
+        getCategoriesByChannel
     };
 };

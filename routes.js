@@ -9,6 +9,10 @@ module.exports = (app, allModels) => {
 	app.get('/login', mainCC.loginPage);
 	app.get('/logout', mainCC.logoutPage);
 
+	app.get('/channels/:id',channelCC.showChannel);
+
+	app.get('/youtube/:type/:id',channelCC.getFromYoutube);
+
 	app.post('/register/user', userCC.checkUser);
 	app.post('/register', userCC.addUser);
 	app.post('/login', userCC.login);

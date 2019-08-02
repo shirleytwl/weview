@@ -1,5 +1,6 @@
 const sha256 = require('js-sha256');
 const SALT = "sAlT aNd PePpEr";
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 module.exports = (db) => {
 
@@ -11,7 +12,7 @@ module.exports = (db) => {
 
             let processed = 0;
             categories.forEach(function (category, index) {
-                db.channel.getChannelByCategories(category.id,(error, callback) => {
+                db.channel.getChannelsByCategory(category.id,(error, callback) => {
                     categories[index].channels = callback;
 
                     if (processed >= categories.length - 1) {

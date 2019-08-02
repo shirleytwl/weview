@@ -13,7 +13,27 @@ ul.stepper .channel-name {
     margin-top:0;
 }
 
-ul.stepper .channel-categories .btn {
+ul.stepper .channel-categories .btn,
+.btn-categories {
     margin-right:1rem;
     margin-bottom: 1rem;
+}
+
+.channel-card a {
+    color: #333;
+}
+.channel-card{
+    transition: opacity .3s;
+}
+.channel-card:hover {
+    opacity: 0.5;
+}
+
+nav ul a {
+    transition: opacity .3s;
+}
+
+nav ul a:hover {
+    background-color: transparent;
+    opacity: 0.5;
 }

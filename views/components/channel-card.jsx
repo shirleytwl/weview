@@ -2,19 +2,19 @@ var React = require('react');
 
 class ChannelCard extends React.Component {
 	render() {
+		let link = "/channels/"+this.props.channel.youtube_id;
 		return (
-			<div className="col s3">
-				<div className="card">
-					<div className="card-image">
-						<img src={this.props.channel.thumbnail_url}/>
+			<div className="col s3 channel-card">
+				<a href={link}>
+					<div className="card">
+						<div className="card-image">
+							<img src={this.props.channel.thumbnail_url}/>
+						</div>
+						<div className="card-content">
+							<p>{this.props.channel.name}</p>
+						</div>
 					</div>
-					<div className="card-content">
-						<p>{this.props.channel.name}</p>
-					</div>
-					<div className="card-action">
-						<a href="#">This is a link</a>
-					</div>
-				</div>
+				</a>
 			</div>
 		);
 	}

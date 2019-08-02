@@ -1,3 +1,8 @@
+const sha256 = require('js-sha256');
+const SALT = "sAlT aNd PePpEr";
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const apikey = require('../api-key.js');
+
 module.exports = (db) => {
 
     let addChannelCC = (req, res) => {
@@ -33,13 +38,56 @@ module.exports = (db) => {
         });
     };
 
+    let showChannelCC = (req, res) => {
+        let loginSession = req.cookies["logged_in"];
+        let username = req.cookies["username"];
+        let data = {};
+        if (!loginSession || loginSession === sha256("logged out" + SALT)) {
+            data = { username: null };
+        }
+        else {
+            data = { username };
+        }
+        db.channel.getChannel(req.params.id, (error, callback) => {
+            if (callback) {
+                data.channel = callback[0];
+                db.channel.getCategoriesByChannel(data.channel.id,(error, callback) => {
+                    data.channel.categories = callback;
+                    res.render('channel', {data});
+                });
+            }
+            else {
+                data.channel = null;
+                res.render('channel', {data});
+            }
+
+        });
+    };
+
+    let getFromYoutubeCC = (req,res) => {
+        let youtubeReq = new XMLHttpRequest();   // new HttpRequest instance
+        youtubeReq.addEventListener("load", function(){
+            res.send(JSON.parse(this.responseText));
+        });
+        let info = req.params.id;
+        if (req.params.type === 'channel') {
+            youtubeReq.open("GET", "https://www.googleapis.com/youtube/v3/channels?key=" + apikey.apikey + "&id=" + info + "&part=snippet,topicDetails");
+        }
+        else if (req.params.type === 'user'){
+            youtubeReq.open("GET", "https://www.googleapis.com/youtube/v3/channels?key=" + apikey.apikey + "&forUsername=" + info + "&part=snippet,topicDetails");
+        }
+        youtubeReq.send();
+    };
     /**
      * ===========================================
      * Export controller functions as a module
      * ===========================================
      */
     return {
-        addChannel: addChannelCC
+        addChannel: addChannelCC,
+        showChannel: showChannelCC,
+        getFromYoutube: getFromYoutubeCC
+
     };
 
 };

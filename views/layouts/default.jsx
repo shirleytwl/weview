@@ -9,7 +9,7 @@ class DefaultLayout extends React.Component {
 			userNavItems = (
 				<React.Fragment>
 					<li className="nav-item">
-						<a className="nav-link" href={profileLink}>Hello, {this.props.username}!</a>
+						<a className="nav-link" href={profileLink}>{this.props.username}!</a>
 					</li>
 					<li className="nav-item">
 						<a className="nav-link" href="/logout">Log out</a>

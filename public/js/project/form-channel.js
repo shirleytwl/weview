@@ -81,22 +81,17 @@ function checkChannel(destroyFeedback, form, activeStepContent) {
 const youtubeReq = (type, info) => {
 	let channelReq = new XMLHttpRequest();   // new HttpRequest instance
 	return new Promise(function (resolve, reject) {
-		channelReq.addEventListener("load", function(){
+		channelReq.addEventListener("load", function () {
 			if (this.status === 200) {
 				let response = JSON.parse(this.responseText);
-				if(response.items.length) {
+				if (response.items.length) {
 					return resolve(response.items[0]);
 				}
 			}
 			return reject();
 		});
 
-		if (type === 'channel') {
-			channelReq.open("GET", "https://www.googleapis.com/youtube/v3/channels?key=" + apikey + "&id=" + info + "&part=snippet,topicDetails");
-		}
-		else if (type === 'user'){
-			channelReq.open("GET", "https://www.googleapis.com/youtube/v3/channels?key=" + apikey + "&forUsername=" + info + "&part=snippet,topicDetails");
-		}
+		channelReq.open("GET", "/youtube/" + type + "/" + info);
 		channelReq.send();
 	});
 };
