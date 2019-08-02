@@ -20,7 +20,6 @@ module.exports = (db) => {
 
                             if (index === req.body.categories.length - 1) {
                                 db.review.addReview(req.body.review,req.cookies["userid"],channelId, (error, callback) => {
-                                    console.log(callback);
                                     if (callback) {
                                         res.status(201).send();
                                     }
@@ -51,8 +50,16 @@ module.exports = (db) => {
             if (callback) {
                 data.channel = callback[0];
                 db.channel.getCategoriesByChannel(data.channel.id,(error, callback) => {
-                    data.channel.categories = callback;
-                    res.render('channel', {data});
+                    if (callback) {
+                        data.channel.categories = callback;
+
+                        db.review.getReviewsByChannel(data.channel.id,(error, callback) => {
+                            if (callback) {
+                                data.channel.reviews = callback;
+                                res.render('channel', {data});
+                            }
+                        });
+                    }
                 });
             }
             else {

@@ -10,6 +10,7 @@ module.exports = (app, allModels) => {
 	app.get('/logout', mainCC.logoutPage);
 
 	app.get('/channels/:id',channelCC.showChannel);
+	// app.get('/users/:id',userCC.showUser);
 
 	app.get('/youtube/:type/:id',channelCC.getFromYoutube);
 

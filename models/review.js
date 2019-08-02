@@ -22,7 +22,26 @@ module.exports = (dbPoolInstance) => {
         });
     };
 
+    let getReviewsByChannel = (channel_id, callback) => {
+        let query = 'SELECT * FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id';
+        // let query = 'SELECT * FROM Channel_Categories INNER JOIN Categories ON (Categories.id=Channel_Categories.category_id) WHERE $1=Channel_Categories.channel_id';
+
+        let values = [channel_id];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
+
     return {
-        addReview
+        addReview,
+        getReviewsByChannel
     };
 };

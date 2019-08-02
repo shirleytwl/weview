@@ -8,6 +8,26 @@ class Home extends React.Component {
 			let link = "/categories/"+category.id;
 			return (<a className="btn btn-small btn-categories" href={link}>{category.name}</a>);
 		});
+		let reviews = channel.reviews.map((review)=>{
+			let link = '/users/'+review.username;
+			return (
+				<div className="col s12">
+					<div className="card">
+						<div className="card-content">
+							<a href={link}><span className="card-title">{review.username}</span></a>
+							<p>{review.content}</p>
+						</div>
+					</div>
+				</div>
+			)
+		});
+		let reviewTitle = "";
+		if (reviews.length <= 1) {
+			reviewTitle = `Review (${reviews.length})`;
+		}
+		else {
+			reviewTitle = `Reviews (${reviews.length})`;
+		}
 		return (
 			<DefaultLayout username={this.props.data.username}>
 				<div className="section">
@@ -30,7 +50,10 @@ class Home extends React.Component {
 				</div>
 				<div className="section">
 					<div className="col s12">
-						<h5>Reviews</h5>
+						<h5>{reviewTitle}</h5>
+						<div className="row">
+							{reviews}
+						</div>
 					</div>
 				</div>
 			</DefaultLayout>
