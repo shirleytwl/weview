@@ -5,9 +5,12 @@ var Category = require("./components/category");
 
 class Home extends React.Component {
 	render() {
-		let categories =this.props.categories.map((category) => {
-			return (<Category category={category}/>)
-		});
+		let categories = "No channel reviews";
+		if (!this.props.categories) {
+			categories = this.props.categories.map((category) => {
+				return (<Category category={category}/>)
+			});
+		}
 		return (
 			<DefaultLayout username={this.props.username}>
 				<div className="section">
