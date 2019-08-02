@@ -6,7 +6,8 @@ var Category = require("./components/category");
 class Home extends React.Component {
 	render() {
 		let categories = "No channel reviews";
-		if (!this.props.categories) {
+		console.log(this.props.categories);
+		if (this.props.categories === null) {
 			categories = this.props.categories.map((category) => {
 				return (<Category category={category}/>)
 			});
