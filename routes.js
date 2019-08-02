@@ -11,6 +11,7 @@ module.exports = (app, allModels) => {
 
 	app.get('/channels/:id',channelCC.showChannel);
 	app.get('/users/:user',userCC.showUser);
+	app.get('/categories/:id',channelCC.showCategoryChannels);
 
 	app.get('/youtube/:type/:id',channelCC.getFromYoutube);
 

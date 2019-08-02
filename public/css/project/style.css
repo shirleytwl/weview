@@ -19,13 +19,16 @@ ul.stepper .channel-categories .btn,
     margin-bottom: 1rem;
 }
 
-.channel-card a {
+.channel-card a,
+.home-category-title a{
     color: #333;
 }
-.channel-card{
+.channel-card,
+.home-category-title{
     transition: opacity .3s;
 }
-.channel-card:hover {
+.channel-card:hover,
+.home-category-title:hover{
     opacity: 0.5;
 }
 
@@ -36,4 +39,14 @@ nav ul a {
 nav ul a:hover {
     background-color: transparent;
     opacity: 0.5;
+}
+
+.home-category-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-category-title i {
+    vertical-align: top;
 }

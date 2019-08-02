@@ -68,7 +68,6 @@ class ChannelForm extends React.Component {
 						</div>
 					</li>
 				</ul>
-				<script src="/js/project/api-key.js"/>
 				<script src="/js/project/form-channel.js"/>
 			</React.Fragment>
 		);

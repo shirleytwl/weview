@@ -41,7 +41,7 @@ class Home extends React.Component {
 				</div>
 				<div className="section">
 					<div className="col s12">
-						<h5>{reviewTitle}</h5>
+						<h4>{reviewTitle}</h4>
 						<div className="row">
 							{reviews}
 						</div>

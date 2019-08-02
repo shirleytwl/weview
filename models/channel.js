@@ -21,8 +21,8 @@ module.exports = (dbPoolInstance) => {
     };
 
     let addCategory = (name, callback) => {
-        let query = 'WITH S AS ( SELECT id FROM Categories WHERE LOWER(name)=$1), I AS ( INSERT INTO Categories (name) SELECT $2 WHERE NOT EXISTS (SELECT 1 FROM S) RETURNING id) SELECT id FROM I UNION ALL SELECT id FROM S;';
-        let values = [name.toLowerCase(),name];
+        let query = 'WITH S AS ( SELECT id FROM Categories WHERE LOWER(name)=LOWER($1)), I AS ( INSERT INTO Categories (name) SELECT $1 WHERE NOT EXISTS (SELECT 1 FROM S) RETURNING id) SELECT id FROM I UNION ALL SELECT id FROM S;';
+        let values = [name];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
                 callback(error, null);
@@ -37,8 +37,8 @@ module.exports = (dbPoolInstance) => {
     };
 
     let addChannelCategory = (channel_id,category_id, callback) => {
-        let query = 'INSERT INTO Channel_Categories(channel_id,category_id) SELECT $1,$2 WHERE NOT EXISTS (SELECT 1 FROM Channel_Categories WHERE channel_id=$3 AND category_id = $4)';
-        let values = [channel_id,category_id,channel_id,category_id];
+        let query = 'INSERT INTO Channel_Categories(channel_id,category_id) SELECT $1,$2 WHERE NOT EXISTS (SELECT 1 FROM Channel_Categories WHERE channel_id=$1 AND category_id = $2)';
+        let values = [channel_id,category_id];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
                 callback(error, null);
@@ -55,6 +55,22 @@ module.exports = (dbPoolInstance) => {
     let getCategories = (callback) => {
         let query = 'SELECT * FROM Categories';
         dbPoolInstance.query(query, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
+
+    let getCategory = (category_id,callback) => {
+        let query = 'SELECT * FROM Categories WHERE $1 = id';
+        let values = [category_id];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
                 callback(error, null);
             } else {
@@ -120,6 +136,7 @@ module.exports = (dbPoolInstance) => {
         addCategory,
         addChannelCategory,
         getCategories,
+        getCategory,
         getChannel,
         getChannelsByCategory,
         getCategoriesByChannel

@@ -13,8 +13,7 @@ module.exports = (db) => {
                 req.body.categories.forEach(function (category, index) {
                     db.channel.addCategory(category, (error, callback) => {
                         if (callback) {
-                            let categoryId = callback;
-                            db.channel.addChannelCategory(channelId, categoryId, (error, callback) => {
+                            db.channel.addChannelCategory(channelId, callback, (error, callback) => {
 
                             });
 
@@ -84,6 +83,36 @@ module.exports = (db) => {
         }
         youtubeReq.send();
     };
+
+    let showCategoryChannelsCC = (req, res) => {
+        let loginSession = req.cookies["logged_in"];
+        let username = req.cookies["username"];
+        let categoryId = req.params.id;
+        db.channel.getCategory(categoryId, (error, callback) => {
+            if (callback) {
+                let category = callback[0];
+                db.channel.getChannelsByCategory(categoryId, (error, callback) => {
+                    if (callback) {
+                        category.channels = callback;
+
+                        if (!loginSession || loginSession === sha256("logged out" + SALT)) {
+                            res.render("category", {username: null, category})
+                        } else {
+                            res.render('category', {username, category});
+                        }
+                    } else {
+                        res.send('no channel found');
+                    }
+                });
+            }
+            else {
+                res.send('no category found');
+            }
+        })
+
+
+    };
+
     /**
      * ===========================================
      * Export controller functions as a module
@@ -92,7 +121,8 @@ module.exports = (db) => {
     return {
         addChannel: addChannelCC,
         showChannel: showChannelCC,
-        getFromYoutube: getFromYoutubeCC
+        getFromYoutube: getFromYoutubeCC,
+        showCategoryChannels: showCategoryChannelsCC
 
     };
 

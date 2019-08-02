@@ -3,13 +3,25 @@ var ChannelCard = require("./channel-card");
 
 class Category extends React.Component {
 	render() {
+
 		let channels =this.props.category.channels.map((channel,index) => {
-			return (<ChannelCard channel={channel}/>)
+			if (channel) {
+				return (<ChannelCard channel={channel}/>)
+			}
+			else { return; }
 		});
+		let link = "/categories/"+this.props.category.id;
 		return (
 			<div className="row">
+				<div className="col s12 ">
+					<a href={link} className="home-category-title">
+						<h4>{this.props.category.name} </h4>
+						<div>
+							<p>View All <i className="material-icons">keyboard_arrow_right</i></p>
+						</div>
+					</a>
+				</div>
 				<div className="col s12">
-					<h5>{this.props.category.name}</h5>
 					<div className="row">
 						{channels}
 					</div>

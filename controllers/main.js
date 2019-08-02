@@ -14,7 +14,13 @@ module.exports = (db) => {
                 let processed = 0;
                 categories.forEach(function (category, index) {
                     db.channel.getChannelsByCategory(category.id, (error, callback) => {
-                        categories[index].channels = callback;
+
+                        if (callback) {
+                            categories[index].channels = callback;
+                        }
+                        else {
+                            categories[index].channels = null;
+                        }
 
                         if (processed >= categories.length - 1) {
                             if (!loginSession || loginSession === sha256("logged out" + SALT)) {
