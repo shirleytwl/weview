@@ -8,23 +8,25 @@ module.exports = (db) => {
         let loginSession = req.cookies["logged_in"];
         let username = req.cookies["username"];
         db.channel.getCategories((error, callback) => {
-            let categories = callback;
+            if (callback) {
+                let categories = callback;
 
-            let processed = 0;
-            categories.forEach(function (category, index) {
-                db.channel.getChannelsByCategory(category.id,(error, callback) => {
-                    categories[index].channels = callback;
+                let processed = 0;
+                categories.forEach(function (category, index) {
+                    db.channel.getChannelsByCategory(category.id, (error, callback) => {
+                        categories[index].channels = callback;
 
-                    if (processed >= categories.length - 1) {
-                        if (!loginSession || loginSession === sha256("logged out" + SALT)) {
-                            res.render("home", {username: null,categories})
-                        } else {
-                            res.render('home', {username,categories});
+                        if (processed >= categories.length - 1) {
+                            if (!loginSession || loginSession === sha256("logged out" + SALT)) {
+                                res.render("home", {username: null, categories})
+                            } else {
+                                res.render('home', {username, categories});
+                            }
                         }
-                    }
-                    processed++;
+                        processed++;
+                    });
                 });
-            });
+            }
         });
 
     };

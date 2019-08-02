@@ -6,7 +6,6 @@ const apikey = process.env.API_KEY || require('../api-key.js');
 module.exports = (db) => {
 
     let addChannelCC = (req, res) => {
-        console.log(req.body);
 
         db.channel.addChannel(req.body, (error, callback) => {
             if (callback) {
