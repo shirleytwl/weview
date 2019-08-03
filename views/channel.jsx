@@ -2,6 +2,7 @@ var React = require("react");
 var DefaultLayout = require("./layouts/default");
 var EditForm = require("./components/form-review-edit");
 var DeleteForm = require("./components/form-review-delete");
+var ReviewModal = require("./modal-review");
 
 class Home extends React.Component {
 	render() {
@@ -105,11 +106,16 @@ class Home extends React.Component {
 					</div>
 				</div>
 				<div className="section">
-					<div className="col s12">
-						<h4>{reviewTitle}</h4>
-						<div className="row">
-							{reviews}
+					<div className="row">
+						<div className="col s6">
+							<h4>{reviewTitle}</h4>
 						</div>
+						<div className="col s6 right-align">
+							<ReviewModal/>
+						</div>
+					</div>
+					<div className="row">
+						{reviews}
 					</div>
 					{editModal}
 					{deleteModal}

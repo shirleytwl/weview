@@ -1,7 +1,7 @@
 var React = require("react");
 var DefaultLayout = require("./layouts/default");
 var ChannelCard = require("./components/channel-card");
-var ReviewModal = require("./modal-review");
+var ChannelModal = require("./modal-channel");
 
 class Home extends React.Component {
 	render() {
@@ -13,7 +13,7 @@ class Home extends React.Component {
 				<div className="section">
 					<div className="row">
 						<div className="col s12">
-							<ReviewModal/>
+							<ChannelModal/>
 						</div>
 						<div className="col s12">
 							<div className="row">

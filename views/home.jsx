@@ -1,6 +1,6 @@
 var React = require("react");
 var DefaultLayout = require("./layouts/default");
-var ReviewModal = require("./modal-review");
+var ReviewModal = require("./modal-channel");
 var Category = require("./components/category");
 
 class Home extends React.Component {
