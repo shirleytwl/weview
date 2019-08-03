@@ -4,7 +4,15 @@ const SALT = "sAlT aNd PePpEr";
 module.exports = (db) => {
 
     let addReviewCC = (req, res) => {
+	    db.review.addReview(req.body.review,req.cookies["userid"],req.params.id, req.body.rating, (error, callback) => {
+		    if (callback) {
+			    res.status(201).send();
+		    }
+		    else {
+			    res.status(204).send();
+		    }
 
+	    })
     };
     let showEditReviewCC = (req, res) => {
         db.review.getReview(req.params.id, (error, callback) => {

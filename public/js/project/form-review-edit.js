@@ -78,7 +78,7 @@ const showReviewInfo = (review_id) => {
 	editReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	editReq.send();
 };
-function formOverview (destroyFeedback, form, activeStepContent) {
+function editFormOverview (destroyFeedback, form, activeStepContent) {
 	let nameEl = activeStepContent.querySelector('#review-edit-form .step-1 .channel-name');
 	let catEl = activeStepContent.querySelector('#review-edit-form .step-1 .channel-categories');
 	let imgEl = activeStepContent.querySelector('#review-edit-form .step-1 .channel-thumbnail');

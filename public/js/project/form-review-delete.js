@@ -80,32 +80,6 @@ const showReviewInfoDel = (review_id) => {
 	editReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	editReq.send();
 };
-function formOverview (destroyFeedback, form, activeStepContent) {
-	let nameEl = activeStepContent.querySelector('.step-1 .channel-name');
-	let catEl = activeStepContent.querySelector('.step-1 .channel-categories');
-	let imgEl = activeStepContent.querySelector('.step-1 .channel-thumbnail');
-	let scoreEl = activeStepContent.querySelector(".rating-score span");
-	let ratingEl = activeStepContent.querySelector("#channel_rating");
-	let reviewEl = activeStepContent.querySelector("#channel_review");
-
-	let overviewName = document.querySelector('.step-2 .channel-name');
-	let overviewCat = document.querySelector('.step-2 .channel-categories');
-	let overviewImg = document.querySelector('.step-2 .channel-thumbnail');
-	let overviewScore = document.querySelector(".overview-score span");
-	let overviewRating = document.querySelector("#overview_rating");
-	let overviewReview = document.querySelector("#overview_review");
-	let overviewReviewLabel = document.querySelector("#overview_review_label");
-
-	overviewName.innerHTML = nameEl.innerHTML;
-	overviewCat.innerHTML = catEl.innerHTML.split("_").join(" ");
-	overviewImg.src = imgEl.src;
-	overviewScore.innerText = scoreEl.innerText;
-	overviewRating.value = ratingEl.value;
-	overviewReview.value = reviewEl.value;
-	overviewReviewLabel.className = "active";
-
-	return destroyFeedback(true);
-};
 
 const submitDelete = (review_id, channel_id) => {
 	let channel = {channel_id};

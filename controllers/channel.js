@@ -110,7 +110,19 @@ module.exports = (db) => {
             }
         })
 
-
+    };
+    let showChannelInfoCC = (req, res) => {
+        db.channel.getChannel(req.params.id, (error, callback) => {
+            if (callback) {
+                let channel = callback[0];
+                db.channel.getCategoriesByChannel(channel.id, (error, callback) => {
+                    if (callback) {
+                        channel.categories = callback;
+                        res.send(channel);
+                    }
+                })
+            }
+        });
     };
 
     /**
@@ -122,8 +134,8 @@ module.exports = (db) => {
         addChannel: addChannelCC,
         showChannel: showChannelCC,
         getFromYoutube: getFromYoutubeCC,
-        showCategoryChannels: showCategoryChannelsCC
-
+        showCategoryChannels: showCategoryChannelsCC,
+        showChannelInfo: showChannelInfoCC
     };
 
 };

@@ -19,30 +19,34 @@ class Home extends React.Component {
 				review.date_created += " (edited)";
 			}
 			let buttonTools = '';
-			if (review.username.toLowerCase() === this.props.data.username.toLowerCase()) {
-				buttonTools = <div className="col s10 right-align">
-					<a className="btn-edit waves-effect waves-light btn modal-trigger" href="#edit-modal" data-review={review.review_id}>
-						<i className="material-icons">edit</i>
-					</a>
-					<a className="btn-delete waves-effect waves-light btn modal-trigger" href="#delete-modal" data-channel={review.channel_id} data-review={review.review_id}>
-						<i className="material-icons">delete</i>
-					</a>
-				</div>;
-				if (editModal === '') {
-					editModal = <div id="edit-modal" className="modal">
-						<div className="modal-content">
-							<h4>Edit channel review</h4>
-							<EditForm/>
+			if (this.props.data.username) {
+				if (review.username.toLowerCase() === this.props.data.username.toLowerCase()) {
+					buttonTools = <div className="col s10 right-align">
+						<a className="btn-edit waves-effect waves-light btn modal-trigger" href="#edit-modal"
+						   data-review={review.review_id}>
+							<i className="material-icons">edit</i>
+						</a>
+						<a className="btn-delete waves-effect waves-light btn modal-trigger" href="#delete-modal"
+						   data-channel={review.channel_id} data-review={review.review_id}>
+							<i className="material-icons">delete</i>
+						</a>
+					</div>;
+					if (editModal === '') {
+						editModal = <div id="edit-modal" className="modal">
+							<div className="modal-content">
+								<h4>Edit channel review</h4>
+								<EditForm/>
+							</div>
 						</div>
-					</div>
-				}
-				if (deleteModal === '') {
-					deleteModal = <div id="delete-modal" className="modal">
-						<div className="modal-content">
-							<h4>Delete channel review</h4>
-							<DeleteForm/>
+					}
+					if (deleteModal === '') {
+						deleteModal = <div id="delete-modal" className="modal">
+							<div className="modal-content">
+								<h4>Delete channel review</h4>
+								<DeleteForm/>
+							</div>
 						</div>
-					</div>
+					}
 				}
 			}
 			return (
@@ -106,12 +110,12 @@ class Home extends React.Component {
 					</div>
 				</div>
 				<div className="section">
-					<div className="row">
+					<div className="row valign-wrapper">
 						<div className="col s6">
-							<h4>{reviewTitle}</h4>
+							<h4 className="review-title">{reviewTitle}</h4>
 						</div>
 						<div className="col s6 right-align">
-							<ReviewModal/>
+							<ReviewModal username={this.props.data.username} channel={channel.youtube_id}/>
 						</div>
 					</div>
 					<div className="row">

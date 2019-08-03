@@ -92,6 +92,9 @@ nav ul a:hover {
     color: #00bfa5;
 }
 
+.channel-overview .card-content .row {
+    margin-bottom: 0;
+}
 .review-card h5.review-rating span.score {
     position: absolute;
     right: 28px;
@@ -139,3 +142,12 @@ nav ul a:hover {
 ul.stepper.horizontal .step.active .step-title::before,
 ul.stepper.horizontal .step.done .step-title::before {
     background-color: #26a69a;
+}
+
+ul.stepper.horizontal .step.wrong .step-title::before {
+    background-color: #d32f2f;
+}
+
+h4.title {
+    margin: 1rem 0;
+}

@@ -2,12 +2,11 @@ var React = require('react');
 
 class ChannelForm extends React.Component {
 	render() {
-		let channel = this.props.channel;
 		return (
 			<React.Fragment>
-				<ul className="stepper linear horizontal" id="review-edit-form">
+				<ul className="stepper linear horizontal" id="add-review-form">
 					<li className="step">
-						<div className="step-title waves-effect waves-dark">Edit Review</div>
+						<div className="step-title waves-effect waves-dark">Write Review</div>
 						<div className="step-content step-1">
 							<div className="row">
 								<div className="col s2">
@@ -36,12 +35,12 @@ class ChannelForm extends React.Component {
 								</div>
 							</div>
 							<div className="step-actions">
-								<button className="waves-effect waves-dark btn next-step" data-feedback="editFormOverview">Next</button>
+								<button className="waves-effect waves-dark btn next-step" data-feedback="reviewOverview">Next</button>
 							</div>
 						</div>
 					</li>
 					<li className="step">
-						<div className="step-title waves-effect waves-dark">Confirm Edit</div>
+						<div className="step-title waves-effect waves-dark">Confirm Review</div>
 						<div className="step-content step-2">
 							<div className="row">
 								<div className="col s2">
@@ -76,7 +75,7 @@ class ChannelForm extends React.Component {
 						</div>
 					</li>
 				</ul>
-				<script src="/js/project/form-review-edit.js"/>
+				<script src="/js/project/form-review.js"/>
 			</React.Fragment>
 		);
 	}

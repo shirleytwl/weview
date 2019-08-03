@@ -1,6 +1,6 @@
 var React = require("react");
 var DefaultLayout = require("./layouts/default");
-var ReviewModal = require("./modal-channel");
+var ChannelModal = require("./modal-channel");
 var Category = require("./components/category");
 
 class Home extends React.Component {
@@ -21,7 +21,7 @@ class Home extends React.Component {
 				<div className="section">
 					<div className="row">
 						<div className="col s12">
-							<ReviewModal username={this.props.username}/>
+							<ChannelModal username={this.props.username}/>
 						</div>
 						<div className="col s12">
 							{categories}
