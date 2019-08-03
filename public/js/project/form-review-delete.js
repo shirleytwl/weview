@@ -56,6 +56,7 @@ const showReviewInfoDel = (review_id) => {
 			channelRating.value = response.rating;
 			reviewEl.value = response.content;
 			reviewLabel.className = "active";
+			catEl.innerText = "";
 			for (let category of response.categories) {
 				let newList = document.createElement("span");
 				newList.className = "btn btn-small disabled";
@@ -96,7 +97,7 @@ function formOverview (destroyFeedback, form, activeStepContent) {
 	let overviewReviewLabel = document.querySelector("#overview_review_label");
 
 	overviewName.innerHTML = nameEl.innerHTML;
-	overviewCat.innerHTML = catEl.innerHTML;
+	overviewCat.innerHTML = catEl.innerHTML.split("_").join(" ");
 	overviewImg.src = imgEl.src;
 	overviewScore.innerText = scoreEl.innerText;
 	overviewRating.value = ratingEl.value;

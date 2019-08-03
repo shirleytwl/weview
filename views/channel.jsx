@@ -8,7 +8,7 @@ class Home extends React.Component {
 		let channel = this.props.data.channel;
 		let categories = channel.categories.map((category)=>{
 			let link = "/categories/"+category.id;
-			return (<a className="btn btn-small btn-categories" href={link}>{category.name}</a>);
+			return (<a className="btn btn-small btn-categories" href={link}>{category.name.split("_").join(" ")}</a>);
 		});
 		let editModal = '';
 		let deleteModal = '';

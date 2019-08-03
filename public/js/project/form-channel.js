@@ -60,7 +60,7 @@ function checkChannel(destroyFeedback, form, activeStepContent) {
 			for (let category of categories) {
 				let newList = document.createElement("span");
 				newList.className = "btn btn-small disabled";
-				newList.innerText = category.match(regex)[1];
+				newList.innerText = category.match(regex)[1].split("_").join(" ");
 				channel_categories.push(category.match(regex)[1]);
 				catEl.append(newList);
 			}

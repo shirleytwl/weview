@@ -54,10 +54,11 @@ const showReviewInfo = (review_id) => {
 			channelRating.value = response.rating;
 			reviewEl.value = response.content;
 			reviewLabel.className = "active";
+			catEl.innerText = "";
 			for (let category of response.categories) {
 				let newList = document.createElement("span");
 				newList.className = "btn btn-small disabled";
-				newList.innerText = category.name;
+				newList.innerText = category.name.split("_").join(" ");
 				catEl.append(newList);
 			}
 		}
