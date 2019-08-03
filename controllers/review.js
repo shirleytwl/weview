@@ -30,6 +30,17 @@ module.exports = (db) => {
         )
     };
 
+    let deleteReviewCC = (req, res) => {
+        db.review.deleteReview(req.params.id, req.body.channel_id,(error, callback) => {
+                if (callback) {
+                    res.send(callback[0]);
+                }
+                else {
+                    res.status(204).send();}
+            }
+        )
+    };
+
     /**
      * ===========================================
      * Export controller functions as a module
@@ -38,7 +49,8 @@ module.exports = (db) => {
     return {
         addReview: addReviewCC,
         showEditReview: showEditReviewCC,
-        editReview: editReviewCC
+        editReview: editReviewCC,
+        deleteReview: deleteReviewCC
     };
 
 };

@@ -1,30 +1,41 @@
 var React = require("react");
 var DefaultLayout = require("./layouts/default");
 var EditForm = require("./components/form-review-edit");
+var DeleteForm = require("./components/form-review-delete");
 
 class Home extends React.Component {
 	render() {
 		let user = this.props.data.user;
-		let modal = '';
+		let editModal = '';
+		let deleteModal = '';
 		let reviews = user.reviews.map((review)=>{
 			let link = '/channels/'+review.youtube_id;
 			if (review.edited) {
 				review.date_created += " (edited)";
 			}
-			let edit = '';
+			let buttonTools = '';
 			if (user.username.toLowerCase() === this.props.data.username.toLowerCase()) {
-				edit = <div className="row right-align">
-					<div className="col s12">
+				buttonTools = <div className="col s10 right-align">
 						<a className="btn-edit waves-effect waves-light btn modal-trigger" href="#edit-modal" data-review={review.id}>
 							<i className="material-icons">edit</i>
 						</a>
-					</div>
-				</div>;
-				if (modal === '') {
-					modal = <div id="edit-modal" className="modal">
+						<a className="btn-delete waves-effect waves-light btn modal-trigger" href="#delete-modal" data-review={review.id}>
+							<i className="material-icons">delete</i>
+						</a>
+					</div>;
+				if (editModal === '') {
+					editModal = <div id="edit-modal" className="modal">
 						<div className="modal-content">
 							<h4>Edit channel review</h4>
 							<EditForm/>
+						</div>
+					</div>
+				}
+				if (deleteModal === '') {
+					deleteModal = <div id="delete-modal" className="modal">
+						<div className="modal-content">
+							<h4>Delete channel review</h4>
+							<DeleteForm/>
 						</div>
 					</div>
 				}
@@ -41,13 +52,17 @@ class Home extends React.Component {
 								</div>
 								<div className="col s8">
 									<p>{review.content}</p>
-									<p>{review.date_created}</p>
 								</div>
 								<div className="col s2">
 									<h5 className="review-rating"><span className="score">{review.rating}</span><span className="slash">╱</span><span className="total-score">5</span></h5>
 								</div>
 							</div>
-							{edit}
+							<div className="row">
+								<div className="col s2">
+									<p>{review.date_created}</p>
+								</div>
+								{buttonTools}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -81,7 +96,8 @@ class Home extends React.Component {
 							{reviews}
 						</div>
 					</div>
-					{modal}
+					{editModal}
+					{deleteModal}
 				</div>
 			</DefaultLayout>
 		);

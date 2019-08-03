@@ -1,12 +1,12 @@
 var stepperInstance;
 var toastCurrentlyDisplayed = false;
-var review_id;
 document.addEventListener('DOMContentLoaded',function () {
 	let editButton = document.querySelectorAll('.btn-edit');
-	let stepper = document.querySelector('.stepper');
+	let stepper = document.querySelector('#review-edit-form');
 	let reviewButton = document.querySelector('#review-edit-form .btn-submit');
-	let channelRating = document.querySelector('#channel_rating');
-	let channelRatingText = document.querySelector('.rating-score span');
+	let channelRating = document.querySelector('#review-edit-form #channel_rating');
+	let channelRatingText = document.querySelector('#review-edit-form .rating-score span');
+	let review_id;
 	stepperInstance = new MStepper(stepper, {
 		firstActive: 0,
 		linearStepsNavigation: false,
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded',function () {
 	});
 	reviewButton.addEventListener('click', function(event){
 		event.preventDefault();
-		submitEdit();
+		submitEdit(review_id);
 	});
 
 	channelRating.addEventListener('change', function(event){
@@ -40,13 +40,13 @@ const showReviewInfo = (review_id) => {
 		if (this.status === 200) {
 			let response = JSON.parse(this.responseText);
 			console.log(response);
-			let nameEl = document.querySelector('.step-1 .channel-name');
-			let catEl = document.querySelector('.step-1 .channel-categories');
-			let imgEl = document.querySelector('.step-1 .channel-thumbnail');
-			let channelRating = document.querySelector('#channel_rating');
-			let channelRatingText = document.querySelector('.rating-score span');
-			let reviewEl = document.querySelector("#channel_review");
-			let reviewLabel = document.querySelector("#channel_review_label");
+			let nameEl = document.querySelector('#review-edit-form .step-1 .channel-name');
+			let catEl = document.querySelector('#review-edit-form .step-1 .channel-categories');
+			let imgEl = document.querySelector('#review-edit-form .step-1 .channel-thumbnail');
+			let channelRating = document.querySelector('#review-edit-form #channel_rating');
+			let channelRatingText = document.querySelector('#review-edit-form .rating-score span');
+			let reviewEl = document.querySelector("#review-edit-form #channel_review");
+			let reviewLabel = document.querySelector("#review-edit-form #channel_review_label");
 
 			nameEl.innerText = response.name;
 			imgEl.src = response.thumbnail_url;
@@ -78,20 +78,20 @@ const showReviewInfo = (review_id) => {
 	editReq.send();
 };
 function formOverview (destroyFeedback, form, activeStepContent) {
-	let nameEl = activeStepContent.querySelector('.step-1 .channel-name');
-	let catEl = activeStepContent.querySelector('.step-1 .channel-categories');
-	let imgEl = activeStepContent.querySelector('.step-1 .channel-thumbnail');
-	let scoreEl = activeStepContent.querySelector(".rating-score span");
-	let ratingEl = activeStepContent.querySelector("#channel_rating");
-	let reviewEl = activeStepContent.querySelector("#channel_review");
+	let nameEl = activeStepContent.querySelector('#review-edit-form .step-1 .channel-name');
+	let catEl = activeStepContent.querySelector('#review-edit-form .step-1 .channel-categories');
+	let imgEl = activeStepContent.querySelector('#review-edit-form .step-1 .channel-thumbnail');
+	let scoreEl = activeStepContent.querySelector("#review-edit-form .rating-score span");
+	let ratingEl = activeStepContent.querySelector("#review-edit-form #channel_rating");
+	let reviewEl = activeStepContent.querySelector("#review-edit-form #channel_review");
 
-	let overviewName = document.querySelector('.step-2 .channel-name');
-	let overviewCat = document.querySelector('.step-2 .channel-categories');
-	let overviewImg = document.querySelector('.step-2 .channel-thumbnail');
-	let overviewScore = document.querySelector(".overview-score span");
-	let overviewRating = document.querySelector("#overview_rating");
-	let overviewReview = document.querySelector("#overview_review");
-	let overviewReviewLabel = document.querySelector("#overview_review_label");
+	let overviewName = document.querySelector('#review-edit-form .step-2 .channel-name');
+	let overviewCat = document.querySelector('#review-edit-form .step-2 .channel-categories');
+	let overviewImg = document.querySelector('#review-edit-form .step-2 .channel-thumbnail');
+	let overviewScore = document.querySelector("#review-edit-form .overview-score span");
+	let overviewRating = document.querySelector("#review-edit-form #overview_rating");
+	let overviewReview = document.querySelector("#review-edit-form #overview_review");
+	let overviewReviewLabel = document.querySelector("#review-edit-form #overview_review_label");
 
 	overviewName.innerHTML = nameEl.innerHTML;
 	overviewCat.innerHTML = catEl.innerHTML;
@@ -104,10 +104,10 @@ function formOverview (destroyFeedback, form, activeStepContent) {
 	return destroyFeedback(true);
 };
 
-const submitEdit = () => {
+const submitEdit = (review_id) => {
 	let reviewData = {
-		review: document.querySelector("#overview_review").value,
-		rating: document.querySelector("#overview_rating").value,
+		review: document.querySelector("#review-edit-form #overview_review").value,
+		rating: document.querySelector("#review-edit-form #overview_rating").value,
 	};
 	let reviewReq = new XMLHttpRequest();   // new HttpRequest instance
 	reviewReq.addEventListener("load", function(){

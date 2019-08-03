@@ -22,5 +22,6 @@ module.exports = (app, allModels) => {
 
 	app.post('/channel',channelCC.addChannel);
 	app.get('/review/:id',reviewCC.showEditReview);
-	app.put('/review/:id',reviewCC.editReview)
+	app.put('/review/:id',reviewCC.editReview);
+	app.delete('/review/:id',reviewCC.deleteReview);
 };
