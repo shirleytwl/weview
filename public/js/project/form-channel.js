@@ -142,16 +142,7 @@ const submitReview = () => {
 	let reviewReq = new XMLHttpRequest();   // new HttpRequest instance
 	reviewReq.addEventListener("load", function(){
 		if (this.status === 201) {
-			// window.location.href = "/";
-			if (!toastCurrentlyDisplayed) {
-				toastCurrentlyDisplayed = true;
-				M.toast({
-					html: 'Review submitted.',
-					completeCallback: function () {
-						toastCurrentlyDisplayed = false;
-					}
-				});
-			}
+			location.reload();
 		}
 		if (this.status === 204) {
 			if (!toastCurrentlyDisplayed) {
@@ -176,7 +167,7 @@ const submitReview = () => {
 			}
 		}
 	});
-	reviewReq.open("POST", "/review");
+	reviewReq.open("POST", "/channel");
 	reviewReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	reviewReq.send(JSON.stringify(reviewData));
 };

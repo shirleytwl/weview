@@ -35,7 +35,7 @@ class DefaultLayout extends React.Component {
 				<link rel="stylesheet" type="text/css" href="/css/mstepper.min.css"/>
 				<link rel="stylesheet" type="text/css" href="/css/project/style.css"/>
 			</head>
-			<body>
+			<body className="grey lighten-2">
 				<div className="navbar-fixed">
 					<nav className="grey darken-4" role="navigation">
 						<div className="nav-wrapper container">
@@ -58,7 +58,7 @@ class DefaultLayout extends React.Component {
 						</div>
 					</nav>
 				</div>
-				<div className="container content">
+				<div className="container content ">
 					{this.props.children}
 				</div>
 				<script src="/js/jquery.min.js"/>

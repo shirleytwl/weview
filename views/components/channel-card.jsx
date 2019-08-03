@@ -2,16 +2,18 @@ var React = require('react');
 
 class ChannelCard extends React.Component {
 	render() {
-		let link = "/channels/"+this.props.channel.youtube_id;
+		let channel = this.props.channel;
+		let link = "/channels/"+channel.youtube_id;
 		return (
 			<div className="col s3 channel-card">
 				<a href={link}>
 					<div className="card">
 						<div className="card-image">
-							<img src={this.props.channel.thumbnail_url}/>
+							<img src={channel.thumbnail_url}/>
 						</div>
 						<div className="card-content">
-							<p>{this.props.channel.name}</p>
+							<h6>{channel.name}</h6>
+							<p>{channel.rating}/5 ({channel.numreviews} reviews)</p>
 						</div>
 					</div>
 				</a>

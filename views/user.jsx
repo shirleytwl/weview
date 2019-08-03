@@ -1,13 +1,33 @@
 var React = require("react");
 var DefaultLayout = require("./layouts/default");
+var EditForm = require("./components/form-review-edit");
 
 class Home extends React.Component {
 	render() {
 		let user = this.props.data.user;
+		let modal = '';
 		let reviews = user.reviews.map((review)=>{
 			let link = '/channels/'+review.youtube_id;
 			if (review.edited) {
 				review.date_created += " (edited)";
+			}
+			let edit = '';
+			if (user.username.toLowerCase() === this.props.data.username.toLowerCase()) {
+				edit = <div className="row right-align">
+					<div className="col s12">
+						<a className="btn-edit waves-effect waves-light btn modal-trigger" href="#edit-modal" data-review={review.id}>
+							<i className="material-icons">edit</i>
+						</a>
+					</div>
+				</div>;
+				if (modal === '') {
+					modal = <div id="edit-modal" className="modal">
+						<div className="modal-content">
+							<h4>Edit channel review</h4>
+							<EditForm/>
+						</div>
+					</div>
+				}
 			}
 			return (
 				<div className="col s12">
@@ -27,6 +47,7 @@ class Home extends React.Component {
 									<h5 className="review-rating"><span className="score">{review.rating}</span><span className="slash">╱</span><span className="total-score">5</span></h5>
 								</div>
 							</div>
+							{edit}
 						</div>
 					</div>
 				</div>
@@ -60,6 +81,7 @@ class Home extends React.Component {
 							{reviews}
 						</div>
 					</div>
+					{modal}
 				</div>
 			</DefaultLayout>
 		);

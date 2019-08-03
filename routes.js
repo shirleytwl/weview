@@ -3,6 +3,7 @@ module.exports = (app, allModels) => {
 	const mainCC = require('./controllers/main')(allModels);
 	const userCC = require('./controllers/user')(allModels);
 	const channelCC = require('./controllers/channel')(allModels);
+	const reviewCC = require('./controllers/review')(allModels);
 
 	app.get('/', mainCC.homePage);
 	app.get('/register', mainCC.registerPage);
@@ -19,5 +20,7 @@ module.exports = (app, allModels) => {
 	app.post('/register', userCC.addUser);
 	app.post('/login', userCC.login);
 
-	app.post('/review',channelCC.addChannel);
+	app.post('/channel',channelCC.addChannel);
+	app.get('/review/:id',reviewCC.showEditReview);
+	app.put('/review/:id',reviewCC.editReview)
 };

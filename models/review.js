@@ -22,6 +22,21 @@ module.exports = (dbPoolInstance) => {
         });
     };
 
+    let getReview = (id,callback) => {
+        let query = 'SELECT Reviews.id, Reviews.content,  Reviews.rating, Reviews.channel_id, Channels.name, Channels.thumbnail_url FROM Reviews INNER JOIN Channels ON (Reviews.channel_id=Channels.id) WHERE $1=Reviews.id';
+        let values = [id];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
     let getReviewsByChannel = (channel_id, callback) => {
         let query = 'SELECT reviews.id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date_created, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating,  Users.id, Users.username FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id';
         let values = [channel_id];
@@ -54,9 +69,27 @@ module.exports = (dbPoolInstance) => {
         });
     };
 
+    let editReview = (id, content, rating, callback) => {
+        let query = 'UPDATE Reviews SET content = $1, rating = $2, edited=true WHERE id=$3 RETURNING id';
+        let values = [content, rating, id];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
+
     return {
         addReview,
+        getReview,
         getReviewsByChannel,
-        getReviewsByUser
+        getReviewsByUser,
+        editReview
     };
 };

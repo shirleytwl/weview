@@ -55,7 +55,7 @@ class ChannelForm extends React.Component {
 						</div>
 					</li>
 					<li className="step">
-						<div className="step-title waves-effect waves-dark">Confirm review</div>
+						<div className="step-title waves-effect waves-dark">Confirm Review</div>
 						<div className="step-content step-3">
 							<div className="row">
 								<div className="col s2">

@@ -84,7 +84,7 @@ module.exports = (dbPoolInstance) => {
     };
 
     let getChannel = (id, callback) => {
-        let query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS noReviews FROM Channels WHERE youtube_id = $1';
+        let query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS numReviews FROM Channels WHERE youtube_id = $1';
         let values = [id];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
@@ -100,7 +100,7 @@ module.exports = (dbPoolInstance) => {
     };
 
     let getChannelsByCategory = (category_id,callback) => {
-        let query = 'SELECT * FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id';
+        let query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS numReviews FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id';
         let values = [category_id];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
