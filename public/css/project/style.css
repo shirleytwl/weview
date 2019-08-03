@@ -11,6 +11,9 @@ ul.stepper .channel-categories .btn,
     margin-right:1rem;
     margin-bottom: 1rem;
 }
+ul.stepper .channel-categories .btn.disabled {
+    color:#333!important;
+}
 
 .channel-card a,
 .home-category-title a{
@@ -79,4 +82,48 @@ nav ul a:hover {
 .range-field,
 .rating-score {
     margin: 1rem 0;
+}
+
+.review-card h5.review-rating,
+.channel-overview h4.review-rating{
+    margin: 0;
+    font-weight: 300;
+    position: relative;
+    color: #00bfa5;
+}
+
+.review-card h5.review-rating span.score {
+    position: absolute;
+    right: 28px;
+    top: 0px;
+}
+.review-card h5.review-rating span.slash {
+    position: absolute;
+    right: 8px;
+    top: 12px;
+}
+.review-card h5.review-rating span.total-score {
+    position: absolute;
+    top: 24px;
+    right: 0;
+}
+
+.channel-overview h4.review-rating span.score {
+    position: absolute;
+    right: 36px;
+    top: 0px;
+}
+.channel-overview h4.review-rating span.slash {
+    position: absolute;
+    right: 12px;
+    top: 16px;
+}
+.channel-overview h4.review-rating span.total-score {
+    position: absolute;
+    top: 28px;
+    right: 0;
+}
+
+#overview_review:disabled {
+    color: #333;
 }

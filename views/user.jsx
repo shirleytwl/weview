@@ -11,17 +11,20 @@ class Home extends React.Component {
 			}
 			return (
 				<div className="col s12">
-					<div className="card">
+					<div className="card review-card">
 						<div className="card-content">
 							<div className="row">
 								<div className="col s2">
 									<img src={review.thumbnail_url}
 									     className="responsive-img"/>
+									<a href={link}><p className="center-align">{review.name}</p></a>
 								</div>
-								<div className="col s10">
-									<a href={link}><span className="card-title">{review.name}</span></a>
+								<div className="col s8">
 									<p>{review.content}</p>
-									<p className="right-align">{review.date_created}</p>
+									<p>{review.date_created}</p>
+								</div>
+								<div className="col s2">
+									<h5 className="review-rating"><span className="score">{review.rating}</span><span className="slash">╱</span><span className="total-score">5</span></h5>
 								</div>
 							</div>
 						</div>
