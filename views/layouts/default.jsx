@@ -39,10 +39,10 @@ class DefaultLayout extends React.Component {
 				<div className="navbar-fixed">
 					<nav className="grey darken-4" role="navigation">
 						<div className="nav-wrapper container">
-							<a id="logo-container" href="/" className="brand-logo">
+							<a id="logo-container " href="/" className="brand-logo">
 								<img src="https://www.shareicon.net/data/256x256/2016/07/09/118682_video_512x512.png" width="30" height="30"
-								     className="d-inline-block align-top mr-3" alt=""/>
-								WeView
+								     className="weview-logo" alt=""/>
+								<span>WeView</span>
 							</a>
 							<ul className="right hide-on-med-and-down">
 								<li><a href="/">Home</a></li>
@@ -58,7 +58,7 @@ class DefaultLayout extends React.Component {
 						</div>
 					</nav>
 				</div>
-				<div className="container">
+				<div className="container content">
 					{this.props.children}
 				</div>
 				<script src="/js/jquery.min.js"/>

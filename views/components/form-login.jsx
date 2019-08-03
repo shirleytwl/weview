@@ -6,6 +6,9 @@ class LoginForm extends React.Component {
 			<React.Fragment>
 				<form id="form-login">
 					<div className="row">
+						<div className="center-align">
+							<h4>Login</h4>
+						</div>
 						<div className="input-field col s12">
 							<input type="text" className="form-username validate"/>
 								<label htmlFor="email">Username</label>
@@ -16,6 +19,7 @@ class LoginForm extends React.Component {
 						</div>
 						<div className="center-align">
 							<button className="waves-effect waves-light btn btn-submit">Login</button>
+							<a href="/register">Don't have an account? Let's create one!</a>
 						</div>
 					</div>
 				</form>

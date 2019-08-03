@@ -31,6 +31,17 @@ class ChannelForm extends React.Component {
 									<div className="channel-categories"></div>
 								</div>
 							</div>
+							<div className="row valign-wrapper">
+								<div className="col s2">
+									<p className="rating-score" htmlFor="channel_rating">Rating <span className="teal-text">0/5</span></p>
+
+								</div>
+								<div className="col s10">
+									<p className="range-field">
+										<input name="channel_rating" type="range" id="channel_rating" min="0" max="5" value="0"/>
+									</p>
+								</div>
+							</div>
 							<div className="row">
 								<div className="input-field col s12">
 									<textarea id="channel_review" name="channel_review" className="materialize-textarea validate" required></textarea>
@@ -53,6 +64,17 @@ class ChannelForm extends React.Component {
 								<div className="col s10">
 									<h5 className="channel-name"></h5>
 									<div className="channel-categories"></div>
+								</div>
+							</div>
+							<div className="row valign-wrapper">
+								<div className="col s2">
+									<p className="overview-score" htmlFor="channel_rating">Rating <span className="teal-text">0/5</span></p>
+
+								</div>
+								<div className="col s10">
+									<p className="range-field">
+										<input name="channel_rating" type="range" id="overview_rating" min="0" max="5" disabled/>
+									</p>
 								</div>
 							</div>
 							<div className="row">

@@ -5,6 +5,8 @@ var channel_categories = [];
 document.addEventListener('DOMContentLoaded',function () {
 	let stepper = document.querySelector('.stepper');
 	let reviewButton = document.querySelector('#channel-review-form .btn-submit');
+	let channelRating = document.querySelector('#channel_rating');
+	let channelRatingText = document.querySelector('.rating-score span');
 	stepperInstance = new MStepper(stepper, {
 		firstActive: 0,
 		linearStepsNavigation: false,
@@ -15,6 +17,10 @@ document.addEventListener('DOMContentLoaded',function () {
 		event.preventDefault();
 		submitReview();
 	});
+
+	channelRating.addEventListener('change', function(event){
+		channelRatingText.innerText = event.target.value +"/5";
+	})
 
 });
 function checkChannel(destroyFeedback, form, activeStepContent) {
@@ -100,16 +106,23 @@ function formOverview (destroyFeedback, form, activeStepContent) {
 	let nameEl = activeStepContent.querySelector('.step-2 .channel-name');
 	let catEl = activeStepContent.querySelector('.step-2 .channel-categories');
 	let imgEl = activeStepContent.querySelector('.step-2 .channel-thumbnail');
+	let scoreEl = activeStepContent.querySelector(".rating-score span");
+	let ratingEl = activeStepContent.querySelector("#channel_rating");
 	let reviewEl = activeStepContent.querySelector("#channel_review");
 
 	let overviewName = document.querySelector('.step-3 .channel-name');
 	let overviewCat = document.querySelector('.step-3 .channel-categories');
 	let overviewImg = document.querySelector('.step-3 .channel-thumbnail');
+	let overviewScore = document.querySelector(".overview-score span");
+	let overviewRating = document.querySelector("#overview_rating");
 	let overviewReview = document.querySelector("#overview_review");
 	let overviewReviewLabel = document.querySelector("#overview_review_label");
+
 	overviewName.innerHTML = nameEl.innerHTML;
 	overviewCat.innerHTML = catEl.innerHTML;
 	overviewImg.src = imgEl.src;
+	overviewScore.innerText = scoreEl.innerText;
+	overviewRating.value = ratingEl.value;
 	overviewReview.value = reviewEl.value;
 	overviewReviewLabel.className = "active";
 
@@ -123,7 +136,8 @@ const submitReview = () => {
 		categories: channel_categories,
 		thumbnail: channel_info.snippet.thumbnails.medium.url,
 		link: "https://www.youtube.com/c/"+channel_info.snippet.customUrl,
-		review: document.querySelector("#overview_review").value
+		review: document.querySelector("#overview_review").value,
+		rating: document.querySelector("#overview_rating").value,
 	};
 	let reviewReq = new XMLHttpRequest();   // new HttpRequest instance
 	reviewReq.addEventListener("load", function(){

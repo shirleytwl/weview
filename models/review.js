@@ -6,9 +6,9 @@
 module.exports = (dbPoolInstance) => {
 
     // `dbPoolInstance` is accessible within this function scope
-    let addReview = (review,user_id,channel_id, callback) => {
-        let query = 'INSERT INTO Reviews (content, date_created, date_edited, user_id, channel_id) SELECT $1, NOW(), NOW(),$2,$3 WHERE NOT EXISTS (SELECT 1 FROM Reviews WHERE user_id=$4 and channel_id=$5 ) RETURNING id';
-        let values = [review,user_id,channel_id,user_id,channel_id];
+    let addReview = (review,user_id,channel_id,rating, callback) => {
+        let query = 'INSERT INTO Reviews (content, date_created, date_edited, user_id, channel_id, edited,rating) SELECT $1, NOW(), NOW(),$2,$3,false,$4 WHERE NOT EXISTS (SELECT 1 FROM Reviews WHERE user_id=$5 and channel_id=$6 ) RETURNING id';
+        let values = [review,user_id,channel_id,rating,user_id,channel_id];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
                 callback(error, null);
@@ -23,7 +23,7 @@ module.exports = (dbPoolInstance) => {
     };
 
     let getReviewsByChannel = (channel_id, callback) => {
-        let query = 'SELECT reviews.id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date_created, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, Users.id, Users.username FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id';
+        let query = 'SELECT reviews.id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date_created, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, edited, Users.id, Users.username FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id';
         let values = [channel_id];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {

@@ -6,10 +6,16 @@ class Home extends React.Component {
 	render() {
 		return (
 			<DefaultLayout>
-				<div className="section">
-					<div className="row">
-						<div className="col s12 m4 offset-m4">
-							<LoginForm/>
+				<div class="wrapper">
+					<div className="section">
+						<div className="row">
+							<div className="col s12 m6 offset-m3">
+								<div className="form-card card">
+									<div className="card-content">
+										<LoginForm/>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

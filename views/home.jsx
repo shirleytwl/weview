@@ -21,7 +21,7 @@ class Home extends React.Component {
 				<div className="section">
 					<div className="row">
 						<div className="col s12">
-							<ReviewModal/>
+							<ReviewModal username={this.props.username}/>
 						</div>
 						<div className="col s12">
 							{categories}

@@ -18,7 +18,7 @@ module.exports = (db) => {
                             });
 
                             if (index === req.body.categories.length - 1) {
-                                db.review.addReview(req.body.review,req.cookies["userid"],channelId, (error, callback) => {
+                                db.review.addReview(req.body.review,req.cookies["userid"],channelId, req.body.rating, (error, callback) => {
                                     if (callback) {
                                         res.status(201).send();
                                     }

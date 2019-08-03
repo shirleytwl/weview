@@ -5,14 +5,25 @@ class Home extends React.Component {
 	render() {
 		let user = this.props.data.user;
 		let reviews = user.reviews.map((review)=>{
-			console.log(review);
 			let link = '/channels/'+review.youtube_id;
+			if (review.edited) {
+				review.date_created += " (edited)";
+			}
 			return (
 				<div className="col s12">
 					<div className="card">
 						<div className="card-content">
-							<a href={link}><span className="card-title">{review.name}</span></a>
-							<p>{review.content}</p>
+							<div className="row">
+								<div className="col s2">
+									<img src={review.thumbnail_url}
+									     className="responsive-img"/>
+								</div>
+								<div className="col s10">
+									<a href={link}><span className="card-title">{review.name}</span></a>
+									<p>{review.content}</p>
+									<p className="right-align">{review.date_created}</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
