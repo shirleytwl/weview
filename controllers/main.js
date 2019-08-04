@@ -33,7 +33,11 @@ module.exports = (db) => {
                 });
             }
             else {
-                res.render("home", {username: null, categories:null})
+                if (!loginSession || loginSession === sha256("logged out" + SALT)) {
+                    res.render("home", {username: null, categories:null})
+                } else {
+                    res.render('home', {username, categories: null});
+                }
             }
         });
 
