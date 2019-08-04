@@ -1,6 +1,10 @@
 const sha256 = require('js-sha256');
 const SALT = "sAlT aNd PePpEr";
 
+const cloudinary = require('cloudinary');
+const cloudinaryConfig = require("../cloudinary-config.json");
+cloudinary.config(cloudinaryConfig);
+
 module.exports = (db) => {
 
     let checkUserCC = (req,res) => {
@@ -23,6 +27,65 @@ module.exports = (db) => {
                 res.status(204).send();
             }
         });
+    };
+    let editUserCC = (req, res) => {
+        if (req.body.newPassword) {
+            db.user.checkPassword(req.params.id, (error, callback) => {
+                if (callback) {
+                    let oldPassword = sha256(SALT+req.body.oldPassword);
+                    if (callback.password === oldPassword) {
+                        let newPassword = sha256(SALT+req.body.newPassword);
+                        db.user.updatePassword(req.params.id, newPassword, (error, callback) => {
+                            if (callback) {
+                                if (req.body.newImage) {
+                                    let dataURI = req.body.newImage;
+                                    let uploadStr = dataURI.replace(/(\r\n|\n|\r)/gm, "");
+                                    cloudinary.v2.uploader.upload(uploadStr,{ eager: [{width: 240, height: 240, crop: "fill"}]},
+                                        function (error, result) {
+                                            let imageUrl = result.eager[0].secure_url;
+                                            db.user.updateImage(req.params.id, imageUrl, (error, callback) => {
+                                                if (callback) {
+                                                    res.status(200).send();
+                                                } else {
+                                                    res.status(204).send();
+                                                }
+                                            });
+                                        });
+                                }
+                                else {
+                                    res.status(200).send();
+                                }
+                            } else {
+                                res.status(204).send();
+                            }
+                        });
+                    }
+                    else {
+                        res.status(203).send();
+                    }
+                } else {
+                    res.status(204).send();
+                }
+            });
+
+        }
+        else {
+            if (req.body.newImage) {
+                let dataURI = req.body.newImage;
+                let uploadStr = dataURI.replace(/(\r\n|\n|\r)/gm, "");
+                cloudinary.v2.uploader.upload(uploadStr,{ eager: [{width: 240, height: 240, crop: "fill"}]},
+                    function (error, result) {
+                        let imageUrl = result.eager[0].secure_url;
+                        db.user.updateImage(req.params.id, imageUrl, (error, callback) => {
+                            if (callback) {
+                                res.status(200).send();
+                            } else {
+                                res.status(204).send();
+                            }
+                        });
+                    });
+            }
+        }
     };
     let showUserCC = (req, res) => {
         let loginSession = req.cookies["logged_in"];
@@ -63,6 +126,14 @@ module.exports = (db) => {
         });
     };
 
+    let showUserInfoCC = (req, res) => {
+        let user = req.params.id;
+        db.user.getUser(user,(error, callback) => {
+            if (callback) {
+                res.send(callback);
+            }
+        });
+    };
 
     /**
      * ===========================================
@@ -72,8 +143,10 @@ module.exports = (db) => {
     return {
         checkUser: checkUserCC,
         addUser: addUserCC,
+        editUser: editUserCC,
         showUser: showUserCC,
-        login: loginCC
+        login: loginCC,
+        showUserInfo: showUserInfoCC
     };
 
 };

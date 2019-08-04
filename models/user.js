@@ -60,8 +60,53 @@ module.exports = (dbPoolInstance) => {
 
     let getUser = (username, callback) => {
 
-        let query = 'SELECT username,id, TO_CHAR(date_joined :: DATE, \'dd Month yyyy\') AS date_joined FROM Users WHERE LOWER(username) = $1';
+        let query = 'SELECT username,id, image, TO_CHAR(date_joined :: DATE, \'dd Month yyyy\') AS date_joined FROM Users WHERE LOWER(username) = $1';
         let values = [username.toLowerCase()];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows[0]);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
+    let checkPassword = (username,callback) => {
+        let query = 'SELECT password FROM Users WHERE LOWER(username) = $1';
+        let values = [username.toLowerCase()];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows[0]);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
+    let updatePassword = (username,password, callback) => {
+        let query = 'UPDATE Users SET password = $1 WHERE LOWER(username) = $2 RETURNING id';
+        let values = [password, username.toLowerCase()];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows[0]);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
+    let updateImage = (username,image, callback) => {
+        let query = 'UPDATE Users SET image = $1 WHERE LOWER(username) = $2 RETURNING id';
+        let values = [image, username.toLowerCase()];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
                 callback(error, null);
@@ -79,6 +124,9 @@ module.exports = (dbPoolInstance) => {
         checkUser,
         addUser,
 	    loginUser,
-        getUser
+        getUser,
+        checkPassword,
+        updatePassword,
+        updateImage
     };
 };

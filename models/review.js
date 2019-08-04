@@ -38,7 +38,7 @@ module.exports = (dbPoolInstance) => {
         });
     };
     let getReviewsByChannel = (channel_id, callback) => {
-        let query = 'SELECT reviews.id AS review_id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date_created, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, Users.id, Users.username FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id';
+        let query = 'SELECT reviews.id AS review_id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date_created, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, Users.id, Users.username, Users.image FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id';
         let values = [channel_id];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {

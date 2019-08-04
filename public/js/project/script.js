@@ -27,8 +27,6 @@ $(document).ready(function(){
 
 function showBTT() {
 	let backToTop = document.querySelector("#backToTop");
-	// console.log (document.documentElement.scrollTop);
-	console.log(document.body.clientHeight);
 	if (document.documentElement.scrollTop > 40 && document.documentElement.scrollTop< (document.body.clientHeight-900)) {
 		backToTop.style.opacity = 1;
 	}

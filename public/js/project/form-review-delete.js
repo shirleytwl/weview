@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded',function () {
 	let editButton = document.querySelectorAll('.btn-delete');
 	let stepper = document.querySelector('#review-delete-form');
 	let reviewButton = document.querySelector('#review-delete-form .btn-submit');
-	let channelRating = document.querySelector('#review-delete-form #channel_rating');
+	let channelRating = document.querySelector('#review-delete-form .channel_rating');
 	let channelRatingText = document.querySelector('#review-delete-form .rating-score span');
 	let review_id;
 	let channel_id;
@@ -45,10 +45,10 @@ const showReviewInfoDel = (review_id) => {
 			let nameEl = document.querySelector('#review-delete-form .step-1 .channel-name');
 			let catEl = document.querySelector('#review-delete-form .step-1 .channel-categories');
 			let imgEl = document.querySelector('#review-delete-form .step-1 .channel-thumbnail');
-			let channelRating = document.querySelector('#review-delete-form #channel_rating');
+			let channelRating = document.querySelector('#review-delete-form .channel_rating');
 			let channelRatingText = document.querySelector('#review-delete-form .rating-score span');
-			let reviewEl = document.querySelector("#review-delete-form #channel_review");
-			let reviewLabel = document.querySelector("#review-delete-form #channel_review_label");
+			let reviewEl = document.querySelector("#review-delete-form .channel_review");
+			let reviewLabel = document.querySelector("#review-delete-form .channel_review_label");
 
 			nameEl.innerText = response.name;
 			imgEl.src = response.thumbnail_url;

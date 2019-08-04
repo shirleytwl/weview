@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded',function () {
 	let editButton = document.querySelectorAll('.btn-edit');
 	let stepper = document.querySelector('#review-edit-form');
 	let reviewButton = document.querySelector('#review-edit-form .btn-submit');
-	let channelRating = document.querySelector('#review-edit-form #channel_rating');
+	let channelRating = document.querySelector('#review-edit-form .channel_rating');
 	let channelRatingText = document.querySelector('#review-edit-form .rating-score span');
 	let review_id;
 	stepperInstance = new MStepper(stepper, {
@@ -43,10 +43,10 @@ const showReviewInfo = (review_id) => {
 			let nameEl = document.querySelector('#review-edit-form .step-1 .channel-name');
 			let catEl = document.querySelector('#review-edit-form .step-1 .channel-categories');
 			let imgEl = document.querySelector('#review-edit-form .step-1 .channel-thumbnail');
-			let channelRating = document.querySelector('#review-edit-form #channel_rating');
+			let channelRating = document.querySelector('#review-edit-form .channel_rating');
 			let channelRatingText = document.querySelector('#review-edit-form .rating-score span');
-			let reviewEl = document.querySelector("#review-edit-form #channel_review");
-			let reviewLabel = document.querySelector("#review-edit-form #channel_review_label");
+			let reviewEl = document.querySelector("#review-edit-form .channel_review");
+			let reviewLabel = document.querySelector("#review-edit-form .channel_review_label");
 
 			nameEl.innerText = response.name;
 			imgEl.src = response.thumbnail_url;

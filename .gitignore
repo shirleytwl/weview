@@ -1,7 +1,7 @@
 # Dependency directory
 node_modules
 
-# Google API Key
-api-key.js
+# API Keys
+google-api-key.js
 
 .floo*

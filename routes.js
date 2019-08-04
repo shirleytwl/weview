@@ -27,4 +27,6 @@ module.exports = (app, allModels) => {
 	app.post('/review/:id',reviewCC.addReview);
 	app.put('/review/:id',reviewCC.editReview);
 	app.delete('/review/:id',reviewCC.deleteReview);
+	app.get('/user-info/:id',userCC.showUserInfo);
+	app.put('/users/:id',userCC.editUser);
 };

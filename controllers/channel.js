@@ -1,7 +1,7 @@
 const sha256 = require('js-sha256');
 const SALT = "sAlT aNd PePpEr";
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const apikey = process.env.API_KEY || require('../api-key.js');
+const apikey = process.env.API_KEY || require('../google-api-key.js');
 
 module.exports = (db) => {
 

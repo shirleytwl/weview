@@ -130,8 +130,9 @@ nav ul a:hover {
     right: 0;
 }
 
-#overview_review:disabled,
-#channel_review:disabled{
+input[type=text].form-username:disabled,
+.overview_review:disabled,
+.channel_review:disabled{
     color: #333;
 }
 

@@ -14,6 +14,7 @@ class Home extends React.Component {
 		let editModal = '';
 		let deleteModal = '';
 		let reviews = channel.reviews.map((review)=>{
+			console.log(review);
 			let link = '/users/'+review.username;
 			if (review.edited) {
 				review.date_created += " (edited)";
@@ -55,9 +56,11 @@ class Home extends React.Component {
 						<div className="card-content">
 							<div className="row">
 								<div className="col s12 m2">
-									<a href={link}><span className="card-title">{review.username}</span></a>
+									<img src={review.image}
+									     className="responsive-img"/>
 								</div>
 								<div className="col s12 m8">
+									<a href={link}><span className="card-title">{review.username}</span></a>
 									<p>{review.content}</p>
 								</div>
 								<div className="col s12 m2">
@@ -87,13 +90,13 @@ class Home extends React.Component {
 				<div className="section">
 					<div className="col s12">
 						<div className="channel-overview card horizontal">
-							<div className="card-image">
-								<img src={channel.thumbnail_url}/>
-							</div>
 							<div className="card-stacked">
 								<div className="card-content">
 									<div className="row">
-										<div className="col s10">
+										<div className="col s2">
+											<img className="responsive-img" src={channel.thumbnail_url}/>
+										</div>
+										<div className="col s8">
 											<span className="card-title">{channel.name}</span>
 											{categories}
 										</div>

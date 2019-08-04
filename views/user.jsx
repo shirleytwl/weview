@@ -2,14 +2,18 @@ var React = require("react");
 var DefaultLayout = require("./layouts/default");
 var EditForm = require("./components/form-review-edit");
 var DeleteForm = require("./components/form-review-delete");
+var ProfileForm = require("./components/form-profile");
 
 class Home extends React.Component {
 	render() {
 		let user = this.props.data.user;
+		let profileModal = '';
+		let profileButton = '';
 		let editModal = '';
 		let deleteModal = '';
 		let reviews = user.reviews.map((review)=>{
 			let link = '/channels/'+review.youtube_id;
+			let userLink = '/users/'+user.username;
 			if (review.edited) {
 				review.date_created += " (edited)";
 			}
@@ -51,6 +55,7 @@ class Home extends React.Component {
 									<a href={link}><p className="center-align">{review.name}</p></a>
 								</div>
 								<div className="col s8">
+									<a href={userLink}><span className="card-title">{user.username}</span></a>
 									<p>{review.content}</p>
 								</div>
 								<div className="col s2">
@@ -75,6 +80,17 @@ class Home extends React.Component {
 		else {
 			reviewTitle = `Reviews posted (${reviews.length})`;
 		}
+		if (user.username === this.props.data.username) {
+			profileModal = <div id="profile-modal" className="modal">
+								<div className="modal-content">
+									<h4>Edit Profile</h4>
+									<ProfileForm/>
+								</div>
+							</div>;
+			profileButton = <a className="btn-profile waves-effect waves-light btn modal-trigger" href="#profile-modal" data-user={user.username}>
+								<i className="material-icons">edit</i>
+							</a>;
+		}
 		return (
 			<DefaultLayout username={this.props.data.username}>
 				<div className="section">
@@ -82,8 +98,18 @@ class Home extends React.Component {
 						<div className="card horizontal">
 							<div className="card-stacked">
 								<div className="card-content">
-									<span className="card-title">{user.username}</span>
-									<p>Date Joined: {user.date_joined}</p>
+									<div className="row">
+										<div className="col s2">
+											<img className="responsive-img" src={user.image}/>
+										</div>
+										<div className="col s9">
+											<span className="card-title">{user.username}</span>
+											<p>Date Joined: {user.date_joined}</p>
+										</div>
+										<div className="col s1 right-align">
+											{profileButton}
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -96,6 +122,7 @@ class Home extends React.Component {
 							{reviews}
 						</div>
 					</div>
+					{profileModal}
 					{editModal}
 					{deleteModal}
 				</div>
