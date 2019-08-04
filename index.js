@@ -16,7 +16,7 @@ app.use(express.urlencoded({
 }));
 app.use(express.static(__dirname+'/public'));
 
-
+app.set('trust proxy', 1)
 
 // Set react-views to be the default view engine
 const reactEngine = require('express-react-views').createEngine();

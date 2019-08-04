@@ -5,3 +5,5 @@ node_modules
 google-api-key.js
 
 .floo*
+
+cloudinary-config.json
