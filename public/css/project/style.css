@@ -164,6 +164,7 @@ h4.title {
 }
 .side-nav {
     position: fixed;
+    z-index: 9;
 }
 .sidenav-items {
     margin-top: 2rem;

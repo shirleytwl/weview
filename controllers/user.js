@@ -2,7 +2,7 @@ const sha256 = require('js-sha256');
 const SALT = "sAlT aNd PePpEr";
 
 const cloudinary = require('cloudinary');
-const cloudinaryConfig = require("../cloudinary-config.json");
+const cloudinaryConfig = process.env.CLOUDINARY_URL || require("../cloudinary-config.json");
 cloudinary.config(cloudinaryConfig);
 
 module.exports = (db) => {
