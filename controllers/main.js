@@ -1,6 +1,5 @@
 const sha256 = require('js-sha256');
 const SALT = "sAlT aNd PePpEr";
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 module.exports = (db) => {
 
@@ -13,7 +12,7 @@ module.exports = (db) => {
 
                 let processed = 0;
                 categories.forEach(function (category, index) {
-                    db.channel.getChannelsByCategory(category.id, (error, callback) => {
+                    db.channel.getChannelsByCategory(category.id,'',4, (error, callback) => {
 
                         if (callback) {
                             categories[index].channels = callback;
@@ -57,11 +56,20 @@ module.exports = (db) => {
         res.redirect('/');
     };
 
+    let getCategoriesCC = (req, res) => {
+        db.channel.getCategories((error, callback) => {
+            if (callback) {
+                let categories = callback;
+            }
+        });
+    };
+
     return {
         homePage: homePageCC,
         registerPage: registerPageCC,
         loginPage: loginPageCC,
-        logoutPage: logoutPageCC
+        logoutPage: logoutPageCC,
+        getCategories: getCategoriesCC
     };
 
 };

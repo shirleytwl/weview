@@ -9,7 +9,7 @@ class DefaultLayout extends React.Component {
 			userNavItems = (
 				<React.Fragment>
 					<li className="nav-item">
-						<a className="nav-link" href={profileLink}>{this.props.username}!</a>
+						<a className="nav-link" href={profileLink}>{this.props.username}</a>
 					</li>
 					<li className="nav-item">
 						<a className="nav-link" href="/logout">Log out</a>
@@ -47,6 +47,7 @@ class DefaultLayout extends React.Component {
 							<ul className="right hide-on-med-and-down">
 								<li><a href="/">Home</a></li>
 								{userNavItems}
+
 							</ul>
 
 							<ul id="nav-mobile" className="sidenav">
@@ -61,6 +62,17 @@ class DefaultLayout extends React.Component {
 				<div className="container content ">
 					{this.props.children}
 				</div>
+				<footer className="page-footer grey darken-4">
+					<div className="container">
+						<div className="row">
+							<div className="col s12 center-align">
+								<p>© 2019 WeView</p>
+							</div>
+						</div>
+					</div>
+					<div className="footer-copyright grey darken-4">
+					</div>
+				</footer>
 				<script src="/js/jquery.min.js"/>
 				<script src="/js/materialize.min.js"/>
 				<script src="/js/mstepper.min.js"/>

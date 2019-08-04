@@ -54,18 +54,18 @@ class Home extends React.Component {
 					<div className="card review-card">
 						<div className="card-content">
 							<div className="row">
-								<div className="col s2">
+								<div className="col s12 m2">
 									<a href={link}><span className="card-title">{review.username}</span></a>
 								</div>
-								<div className="col s8">
+								<div className="col s12 m8">
 									<p>{review.content}</p>
 								</div>
-								<div className="col s2">
+								<div className="col s12 m2">
 									<h5 className="review-rating"><span className="score">{review.rating}</span><span className="slash">╱</span><span className="total-score">5</span></h5>
 								</div>
 							</div>
 							<div className="row">
-								<div className="col s2">
+								<div className="col s12 m2">
 									<p>Posted on {review.date_created}</p>
 								</div>
 								{buttonTools}

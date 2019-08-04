@@ -6,12 +6,8 @@ class Category extends React.Component {
 		let category = this.props.category.name.split("_").join(" ");
 		let channels =this.props.category.channels.map((channel,index) => {
 			if (channel) {
-				if (channel.numreviews != '0') {
-					return (<ChannelCard channel={channel}/>)
-				}
-				else { return;}
+				return (<ChannelCard channel={channel}/>)
 			}
-			else { return; }
 		});
 		let link = "/categories/"+this.props.category.id;
 		return (

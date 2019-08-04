@@ -85,13 +85,16 @@ module.exports = (db) => {
     };
 
     let showCategoryChannelsCC = (req, res) => {
+        let sortby = 'htl';
+        if (req.query.sortby) sortby = req.query.sortby;
+
         let loginSession = req.cookies["logged_in"];
         let username = req.cookies["username"];
         let categoryId = req.params.id;
         db.channel.getCategory(categoryId, (error, callback) => {
             if (callback) {
                 let category = callback[0];
-                db.channel.getChannelsByCategory(categoryId, (error, callback) => {
+                db.channel.getChannelsByCategory(categoryId,sortby,0, (error, callback) => {
                     if (callback) {
                         category.channels = callback;
 

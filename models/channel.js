@@ -99,9 +99,29 @@ module.exports = (dbPoolInstance) => {
         });
     };
 
-    let getChannelsByCategory = (category_id,callback) => {
-        let query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS numReviews FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id';
+    let getChannelsByCategory = (category_id, sortby, limit, callback) => {
+        let query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS numReviews FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id AND ( SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id ) > 0 ORDER BY rating DESC, Channels.name ASC';
+        if (sortby === 'htl') {
+            query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS numReviews FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id AND ( SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id ) > 0 ORDER BY rating DESC, Channels.name ASC';
+        }
+        else if (sortby === 'lth') {
+            query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS numReviews FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id AND ( SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id ) > 0 ORDER BY rating ASC, Channels.name ASC';
+
+        }
+        else if (sortby === 'a-z') {
+            query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS numReviews FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id AND ( SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id ) > 0 ORDER BY Channels.name ASC, rating DESC';
+        }
+        else if (sortby === 'z-a') {
+            query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS numReviews FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id AND ( SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id ) > 0 ORDER BY Channels.name DESC, rating DESC';
+        }
+        else if (sortby === 'reviews'){
+            query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS numReviews FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id AND ( SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id ) > 0 ORDER BY numReviews DESC,rating DESC,Channels.name ASC';
+        }
         let values = [category_id];
+        if (limit !== 0) {
+        query = 'SELECT *, (SELECT ROUND(AVG(rating), 1) FROM Reviews WHERE Reviews.channel_id = Channels.id) AS rating, (SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id) AS numReviews FROM Channel_Categories INNER JOIN Channels ON (Channels.id=Channel_Categories.channel_id) WHERE $1=Channel_Categories.category_id AND ( SELECT COUNT(id) FROM REVIEWS WHERE Reviews.channel_id = Channels.id ) > 0 ORDER BY rating DESC, Channels.name ASC LIMIT $2';
+            values = [category_id,limit]
+        }
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
                 callback(error, null);

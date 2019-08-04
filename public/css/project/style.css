@@ -1,3 +1,6 @@
+.container.content {
+    min-height: calc(100vh - 206px);
+}
 ul.stepper.horizontal {
     /*min-height: 280px;*/
 }
@@ -150,4 +153,11 @@ ul.stepper.horizontal .step.wrong .step-title::before {
 
 h4.title {
     margin: 1rem 0;
+}
+#dropdown.dropdown-content {
+    width: auto!important;
+    top:64px!important;
+}
+.sort {
+    margin-top: 1.5rem;
 }
