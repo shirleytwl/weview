@@ -19,7 +19,7 @@ class Home extends React.Component {
 							<div className="col s12">
 								<div className="row">
 									<div className="col s9">
-										<h4 id="category-title" className="title" data-category={this.props.category.id}>{this.props.category.name} </h4>
+										<h4 id="category-title" className="title" data-category={this.props.category.id}>{this.props.category.name.split("_").join(" ")} </h4>
 									</div>
 									<div className="col s3">
 										<label>Sort by</label>

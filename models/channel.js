@@ -53,7 +53,7 @@ module.exports = (dbPoolInstance) => {
     };
 
     let getCategories = (callback) => {
-        let query = 'SELECT * FROM Categories';
+        let query = 'SELECT * FROM Categories ORDER BY name ASC';
         dbPoolInstance.query(query, (error, queryResult) => {
             if (error) {
                 callback(error, null);

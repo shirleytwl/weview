@@ -3,9 +3,9 @@ var ChannelForm = require("./components/form-channel");
 
 class ChannelModal extends React.Component {
 	render() {
-		let button = <a className="waves-effect waves-light btn modal-trigger" href="#review-modal">Create channel review</a>
+		let button = <a className="waves-effect waves-light btn modal-trigger btn-create" href="#review-modal">Create channel review</a>
 		if (!this.props.username) {
-			button = <a className="waves-effect btn waves-light" href="/login">Login to create review</a>
+			button = <a className="waves-effect btn waves-light btn-create" href="/login">Login to create review</a>
 		}
 		return (
 			<React.Fragment>

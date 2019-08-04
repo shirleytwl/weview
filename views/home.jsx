@@ -6,6 +6,7 @@ var Category = require("./components/category");
 class Home extends React.Component {
 	render() {
 		let categories = "No channel reviews";
+		let sideNav = "No channel reviews";
 		if (this.props.categories) {
 			categories = this.props.categories.map((category) => {
 				if (category.channels) {
@@ -15,15 +16,30 @@ class Home extends React.Component {
 					return;
 				}
 			});
+			sideNav = this.props.categories.map((category) => {
+				if (category.channels) {
+					let link = "#"+category.id;
+					return (<a href={link}>{category.name.split("_").join(" ")}</a>)
+				}
+				else {
+					return;
+				}
+			});
 		}
+
 		return (
 			<DefaultLayout username={this.props.username}>
 				<div className="section">
 					<div className="row">
-						<div className="col s12">
+						<div className="col s2 side-nav">
 							<ChannelModal username={this.props.username}/>
+							<div class="card sidenav-items">
+								<div class="card-content">
+									{sideNav}
+								</div>
+							</div>
 						</div>
-						<div className="col s12">
+						<div className="col s9 offset-s3">
 							{categories}
 						</div>
 					</div>

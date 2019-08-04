@@ -12,7 +12,7 @@ module.exports = (db) => {
 
                 let processed = 0;
                 categories.forEach(function (category, index) {
-                    db.channel.getChannelsByCategory(category.id,'',4, (error, callback) => {
+                    db.channel.getChannelsByCategory(category.id,'',3, (error, callback) => {
 
                         if (callback) {
                             categories[index].channels = callback;

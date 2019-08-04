@@ -11,7 +11,7 @@ class Category extends React.Component {
 		});
 		let link = "/categories/"+this.props.category.id;
 		return (
-			<div className="row">
+			<div id={this.props.category.id} className="row">
 				<div className="col s12 ">
 					<a href={link} className="home-category-title">
 						<h4>{category} </h4>

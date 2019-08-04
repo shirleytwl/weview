@@ -1,5 +1,5 @@
 .container.content {
-    min-height: calc(100vh - 206px);
+    min-height: calc(100vh - 156px);
 }
 ul.stepper.horizontal {
     /*min-height: 280px;*/
@@ -160,4 +160,39 @@ h4.title {
 }
 .sort {
     margin-top: 1.5rem;
+}
+.side-nav {
+    position: fixed;
+}
+.sidenav-items {
+    margin-top: 2rem;
+}
+.sidenav-items a {
+    display: block;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+.sidenav-items a:last-child {
+    margin-bottom: 0;
+}
+.side-nav .sidenav-items {
+    max-height: 55vh;
+    overflow-y: scroll;
+}
+
+.btn-create {
+    margin-top:2rem;
+}
+
+#backToTop {
+    opacity: 0;
+    position: fixed;
+    bottom: 1rem;
+    right: 15px;
+    z-index: 99;
+    transition: 0.5s;
+}
+.footer-copyright {
+    min-height: 0!important;
+    padding: 0!important;
 }

@@ -73,6 +73,7 @@ class DefaultLayout extends React.Component {
 					<div className="footer-copyright grey darken-4">
 					</div>
 				</footer>
+				<button id="backToTop" className="btn-floating waves-effect waves-light"><i className="material-icons">arrow_upward</i></button>
 				<script src="/js/jquery.min.js"/>
 				<script src="/js/materialize.min.js"/>
 				<script src="/js/mstepper.min.js"/>
