@@ -59,14 +59,14 @@ class ChannelForm extends React.Component {
 								</div>
 								<div className="col s10">
 									<p className="range-field">
-										<input name="channel_rating" type="range" id="overview_rating" min="0" max="5" disabled/>
+										<input name="overview_rating" type="range" className="overview_rating" min="0" max="5" disabled/>
 									</p>
 								</div>
 							</div>
 							<div className="row">
 								<div className="input-field col s12">
-									<textarea id="overview_review" name="overview_review" className="materialize-textarea validate" disabled></textarea>
-									<label id="overview_review_label" htmlFor="overview_review">Review</label>
+									<textarea name="overview_review" className="overview_review materialize-textarea validate" disabled></textarea>
+									<label className="overview_review_label" htmlFor="overview_review">Review</label>
 								</div>
 							</div>
 							<div className="step-actions">

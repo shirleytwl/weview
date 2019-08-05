@@ -83,16 +83,16 @@ function editFormOverview (destroyFeedback, form, activeStepContent) {
 	let catEl = activeStepContent.querySelector('#review-edit-form .step-1 .channel-categories');
 	let imgEl = activeStepContent.querySelector('#review-edit-form .step-1 .channel-thumbnail');
 	let scoreEl = activeStepContent.querySelector("#review-edit-form .rating-score span");
-	let ratingEl = activeStepContent.querySelector("#review-edit-form #channel_rating");
-	let reviewEl = activeStepContent.querySelector("#review-edit-form #channel_review");
+	let ratingEl = activeStepContent.querySelector("#review-edit-form .channel_rating");
+	let reviewEl = activeStepContent.querySelector("#review-edit-form .channel_review");
 
 	let overviewName = document.querySelector('#review-edit-form .step-2 .channel-name');
 	let overviewCat = document.querySelector('#review-edit-form .step-2 .channel-categories');
 	let overviewImg = document.querySelector('#review-edit-form .step-2 .channel-thumbnail');
 	let overviewScore = document.querySelector("#review-edit-form .overview-score span");
-	let overviewRating = document.querySelector("#review-edit-form #overview_rating");
-	let overviewReview = document.querySelector("#review-edit-form #overview_review");
-	let overviewReviewLabel = document.querySelector("#review-edit-form #overview_review_label");
+	let overviewRating = document.querySelector("#review-edit-form .overview_rating");
+	let overviewReview = document.querySelector("#review-edit-form .overview_review");
+	let overviewReviewLabel = document.querySelector("#review-edit-form .overview_review_label");
 
 	overviewName.innerHTML = nameEl.innerHTML;
 	overviewCat.innerHTML = catEl.innerHTML;
@@ -107,8 +107,8 @@ function editFormOverview (destroyFeedback, form, activeStepContent) {
 
 const submitEdit = (review_id) => {
 	let reviewData = {
-		review: document.querySelector("#review-edit-form #overview_review").value,
-		rating: document.querySelector("#review-edit-form #overview_rating").value,
+		review: document.querySelector("#review-edit-form .overview_review").value,
+		rating: document.querySelector("#review-edit-form .overview_rating").value,
 	};
 	let reviewReq = new XMLHttpRequest();   // new HttpRequest instance
 	reviewReq.addEventListener("load", function(){

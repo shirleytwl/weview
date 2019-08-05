@@ -56,8 +56,9 @@ class Home extends React.Component {
 						<div className="card-content">
 							<div className="row">
 								<div className="col s12 m2">
-									<img src={review.image}
-									     className="responsive-img"/>
+									<a href={link}>
+										<img src={review.image} className="responsive-img"/>
+									</a>
 								</div>
 								<div className="col s12 m8">
 									<a href={link}><span className="card-title">{review.username}</span></a>

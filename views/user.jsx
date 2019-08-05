@@ -50,9 +50,11 @@ class Home extends React.Component {
 						<div className="card-content">
 							<div className="row">
 								<div className="col s2">
-									<img src={review.thumbnail_url}
-									     className="responsive-img"/>
-									<a href={link}><p className="center-align">{review.name}</p></a>
+									<a href={link}>
+										<img src={review.thumbnail_url}
+										     className="responsive-img"/>
+										<p className="center-align">{review.name}</p>
+									</a>
 								</div>
 								<div className="col s8">
 									<a href={userLink}><span className="card-title">{user.username}</span></a>

@@ -1,7 +1,7 @@
 const sha256 = require('js-sha256');
 const SALT = "sAlT aNd PePpEr";
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const apikey = {apikey: process.env.GOOGLE_API_KEY} || require('../google-api-key.js');
+const apikey = require('../google-api-key.js') || {apikey: process.env.GOOGLE_API_KEY};
 
 module.exports = (db) => {
 
@@ -16,7 +16,6 @@ module.exports = (db) => {
                             db.channel.addChannelCategory(channelId, callback, (error, callback) => {
 
                             });
-
                             if (index === req.body.categories.length - 1) {
                                 db.review.addReview(req.body.review,req.cookies["userid"],channelId, req.body.rating, (error, callback) => {
                                     if (callback) {
@@ -25,7 +24,6 @@ module.exports = (db) => {
                                     else {
                                         res.status(204).send();
                                     }
-
                                 })
                             }
                         }
