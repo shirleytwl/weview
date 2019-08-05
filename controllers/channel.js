@@ -1,7 +1,11 @@
 const sha256 = require('js-sha256');
 const SALT = "sAlT aNd PePpEr";
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const apikey = require('../google-api-key.js') || {apikey: process.env.GOOGLE_API_KEY};
+var apikey = {apikey: process.env.GOOGLE_API_KEY} ;
+
+if (!apikey.apikey) {
+    apikey = require('../google-api-key.js');
+}
 
 module.exports = (db) => {
 

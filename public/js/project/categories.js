@@ -10,7 +10,3 @@ $(document).ready(function(){
 		location.href = '/categories/'+categoryId+'/?sortby='+e.target.value;
 	});
 });
-
-function sort () {
-	console.log("Hah");
-}

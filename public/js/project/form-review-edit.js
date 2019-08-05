@@ -39,7 +39,6 @@ const showReviewInfo = (review_id) => {
 	editReq.addEventListener("load", function(){
 		if (this.status === 200) {
 			let response = JSON.parse(this.responseText);
-			console.log(response);
 			let nameEl = document.querySelector('#review-edit-form .step-1 .channel-name');
 			let catEl = document.querySelector('#review-edit-form .step-1 .channel-categories');
 			let imgEl = document.querySelector('#review-edit-form .step-1 .channel-thumbnail');

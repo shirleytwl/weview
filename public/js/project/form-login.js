@@ -22,7 +22,6 @@ const login = (username,password) => {
 			window.location.href = "/";
 		}
 		else if (this.status === 204) {
-			console.log("Invalid username/password");
 			M.toast({html: 'Invalid username/password',displayLength:1500});
 		}
 		else {

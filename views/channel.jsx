@@ -14,7 +14,6 @@ class Home extends React.Component {
 		let editModal = '';
 		let deleteModal = '';
 		let reviews = channel.reviews.map((review)=>{
-			console.log(review);
 			let link = '/users/'+review.username;
 			if (review.edited) {
 				review.date_created += " (edited)";
