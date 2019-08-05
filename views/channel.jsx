@@ -23,7 +23,7 @@ class Home extends React.Component {
 				if (review.username.toLowerCase() === this.props.data.username.toLowerCase()) {
 					buttonTools = <div className="col s10 right-align">
 						<a className="btn-edit waves-effect waves-light btn modal-trigger" href="#edit-modal"
-						   data-review={review.review_id}>
+						   data-channel={review.channel_id} data-review={review.review_id}>
 							<i className="material-icons">edit</i>
 						</a>
 						<a className="btn-delete waves-effect waves-light btn modal-trigger" href="#delete-modal"
