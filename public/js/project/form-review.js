@@ -100,7 +100,7 @@ const submitReview = () => {
 		if (this.status === 201) {
 			location.reload();
 		}
-		if (this.status === 204) {
+		else if (this.status === 204) {
 			if (!editToastCurrentlyDisplayed) {
 				editToastCurrentlyDisplayed = true;
 				M.toast({
