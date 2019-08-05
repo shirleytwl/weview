@@ -87,6 +87,28 @@ module.exports = (db) => {
             }
         }
     };
+    let deleteUserCC = (req, res) => {
+        db.user.checkPassword(req.params.id, (error, callback) => {
+            if (callback) {
+                let password = sha256(SALT+req.body.password);
+                if (callback.password === password) {
+                    db.user.deleteUser(req.cookies['userid'], (error, callback) => {
+                        if (callback) {
+                            res.status(200).send();
+                        } else {
+                            res.status(204).send();
+                        }
+                    });
+                }
+                else {
+                    res.status(203).send();
+                }
+            } else {
+                res.status(204).send();
+            }
+        });
+
+    };
     let showUserCC = (req, res) => {
         let loginSession = req.cookies["logged_in"];
         let username = req.cookies["username"];
@@ -144,6 +166,7 @@ module.exports = (db) => {
         checkUser: checkUserCC,
         addUser: addUserCC,
         editUser: editUserCC,
+        deleteUser: deleteUserCC,
         showUser: showUserCC,
         login: loginCC,
         showUserInfo: showUserInfoCC

@@ -119,6 +119,21 @@ module.exports = (dbPoolInstance) => {
             }
         });
     };
+    let deleteUser = (userid, callback) => {
+        let query = 'DELETE FROM users WHERE users.id = $1 RETURNING id';
+        let values = [userid];
+        dbPoolInstance.query(query, values, (error, queryResult) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                if (queryResult.rows.length > 0) {
+                    callback(null, queryResult.rows[0]);
+                } else {
+                    callback(null, null);
+                }
+            }
+        });
+    };
 
     return {
         checkUser,
@@ -127,6 +142,7 @@ module.exports = (dbPoolInstance) => {
         getUser,
         checkPassword,
         updatePassword,
-        updateImage
+        updateImage,
+        deleteUser
     };
 };

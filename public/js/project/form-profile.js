@@ -1,3 +1,4 @@
+var profToastCurrentlyDisplayed = false;
 document.addEventListener('DOMContentLoaded',function () {
 	let profileButton = document.querySelector('.btn-profile');
 	let pfButton = document.querySelector('#form-profile .btn-submit');
@@ -5,23 +6,11 @@ document.addEventListener('DOMContentLoaded',function () {
 	let pfPasswordOld = document.querySelector('#form-profile .form-password-old');
 	let pfPasswordNew = document.querySelector('#form-profile .form-password-new');
 	let imageInput = document.querySelector('#form-profile .form-profile-image');
-	pfButton.addEventListener('click', function (event) {
-		event.preventDefault();
-		if (pfUsername.value.trim() === "") {
-			M.toast({html: 'This username cannot be used.', displayLength: 1500});
-		} else {
-		}
-
-	});
-	let user_id;
+	let delPassword = document.querySelector("#confirm-delete-modal .form-password-del");
+	let delButton = document.querySelector('#confirm-delete-modal .btn-confirm-delete');
+	let user_id = document.querySelector('.user-card').dataset.user;
 	profileButton.addEventListener('click', function (event) {
-		if (!event.target.dataset.user) {
-			user_id = event.target.parentNode.dataset.user;
-			showUserInfo(user_id);
-		} else {
-			user_id = event.target.dataset.user;
-			showUserInfo(user_id);
-		}
+		showUserInfo(user_id);
 	});
 	pfPasswordOld.addEventListener('keyup',function (event){
 		if (pfPasswordOld.value.trim() !== "") {
@@ -47,23 +36,31 @@ document.addEventListener('DOMContentLoaded',function () {
 		}
 	});
 	imageInput.addEventListener('change', function(event){
-		var preview = document.querySelector('.form-image-preview');
-		var file    = document.querySelector('input[type=file].form-profile-image').files[0];
-		var reader  = new FileReader();
-
-		reader.addEventListener("load", function () {
-			preview.src = reader.result;
-		}, false);
-
-		if (file) {
-			reader.readAsDataURL(file);
-			pfButton.disabled = false;
+		if (pfPasswordOld.value.trim() !== "") {
+			pfPasswordNew.disabled = false;
 		}
 	});
 
 	pfButton.addEventListener('click', function(event){
 		event.preventDefault();
 		submitProfile(user_id);
+	});
+	delButton.addEventListener('click', function (event) {
+		event.preventDefault();
+		if (delPassword.value.trim() === "") {
+			if (!profToastCurrentlyDisplayed) {
+				profToastCurrentlyDisplayed = true;
+				M.toast({
+					html: 'Incorrect Password.',
+					displayLength: 1500,
+					completeCallback: function () {
+						profToastCurrentlyDisplayed = false;
+					}
+				});
+			}
+		} else {
+			deleteProfile(user_id)
+		}
 	});
 });
 
@@ -80,12 +77,13 @@ const showUserInfo = (user_id) => {
 			imageEl.src = response.image;
 		}
 		else {
-			if (!toastCurrentlyDisplayed) {
-				toastCurrentlyDisplayed = true;
+			if (!profToastCurrentlyDisplayed) {
+				profToastCurrentlyDisplayed = true;
 				M.toast({
 					html: 'There is issue making the HTTP Request.',
+					displayLength: 1500,
 					completeCallback: function () {
-						toastCurrentlyDisplayed = false;
+						profToastCurrentlyDisplayed = false;
 					}
 				});
 			}
@@ -105,36 +103,78 @@ const submitProfile = (user_id) => {
 	if (document.querySelector('#form-profile .form-profile-image').value !== "") {
 		userData.newImage = document.querySelector('.form-image-preview').src;
 	}
-	let reviewReq = new XMLHttpRequest();   // new HttpRequest instance
-	reviewReq.addEventListener("load", function(){
+	let profileReq = new XMLHttpRequest();   // new HttpRequest instance
+	profileReq.addEventListener("load", function(){
 		if (this.status === 200) {
 			location.reload();
 		}
 		else if (this.status === 203) {
 			// location.reload();
-			if (!toastCurrentlyDisplayed) {
-				toastCurrentlyDisplayed = true;
+			if (!profToastCurrentlyDisplayed) {
+				profToastCurrentlyDisplayed = true;
 				M.toast({
-					html: 'Incorrect password!',
+					html: 'Incorrect Password',
+					displayLength: 1500,
 					completeCallback: function () {
-						toastCurrentlyDisplayed = false;
+						profToastCurrentlyDisplayed = false;
 					}
 				});
 			}
 		}
 		else {
-			if (!toastCurrentlyDisplayed) {
-				toastCurrentlyDisplayed = true;
+			if (!profToastCurrentlyDisplayed) {
+				profToastCurrentlyDisplayed = true;
 				M.toast({
 					html: 'There is issue making the HTTP Request.',
+					displayLength: 1500,
 					completeCallback: function () {
-						toastCurrentlyDisplayed = false;
+						profToastCurrentlyDisplayed = false;
 					}
 				});
 			}
 		}
 	});
-	reviewReq.open("PUT", "/users/"+user_id);
-	reviewReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	reviewReq.send(JSON.stringify(userData));
+	profileReq.open("PUT", "/users/"+user_id);
+	profileReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	profileReq.send(JSON.stringify(userData));
+};
+
+const deleteProfile = (user_id) => {
+	let userData = {
+		username: user_id,
+		password: document.querySelector("#confirm-delete-modal .form-password-del").value
+	};
+	let delReq = new XMLHttpRequest();   // new HttpRequest instance
+	delReq.addEventListener("load", function(){
+		if (this.status === 200) {
+			document.location.href="/logout";
+		}
+		else if (this.status === 203) {
+			if (!profToastCurrentlyDisplayed) {
+				profToastCurrentlyDisplayed = true;
+				M.toast({
+					html: 'Incorrect Password',
+					displayLength: 1500,
+					completeCallback: function () {
+						profToastCurrentlyDisplayed = false;
+					}
+				});
+			}
+		}
+		else {
+			if (!profToastCurrentlyDisplayed) {
+				profToastCurrentlyDisplayed = true;
+				M.toast({
+					html: 'There is issue making the HTTP Request.',
+					displayLength: 1500,
+					completeCallback: function () {
+						profToastCurrentlyDisplayed = false;
+					}
+				});
+			}
+		}
+	});
+	delReq.open("DELETE", "/users/"+user_id);
+	delReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	delReq.send(JSON.stringify(userData));
 };

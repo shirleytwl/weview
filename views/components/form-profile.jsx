@@ -39,9 +39,20 @@ class ProfileForm extends React.Component {
 					<div className="row">
 						<div className="col s12 center-align">
 							<button className="waves-effect waves-light btn btn-submit" disabled>Update Profile</button>
+							<a className="waves-effect waves-light btn modal-trigger btn-prof-delete red darken-2" href="#confirm-delete-modal">Delete Account</a>
 						</div>
 					</div>
 				</form>
+				<div id="confirm-delete-modal" className="modal">
+					<div className="modal-content center-align">
+						<h6>Please type your password to <strong>delete</strong> your account</h6>
+						<div className="input-field col s6">
+							<input type="password" className="form-password-del validate"/>
+							<label htmlFor="password-del">Password</label>
+						</div>
+						<button className="waves-effect waves-light btn btn-confirm-delete red darken-2">Delete Account</button>
+					</div>
+				</div>
 				<script src="/js/project/form-profile.js"/>
 			</React.Fragment>
 		);

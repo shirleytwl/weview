@@ -95,8 +95,7 @@ class Home extends React.Component {
 					</div>
 				</div>;
 				profileButton =
-					<a className="btn-profile waves-effect waves-light btn modal-trigger" href="#profile-modal"
-					   data-user={user.username}>
+					<a className="btn-profile waves-effect waves-light btn modal-trigger" href="#profile-modal">
 						<i className="material-icons">edit</i>
 					</a>;
 			}
@@ -105,7 +104,7 @@ class Home extends React.Component {
 			<DefaultLayout username={this.props.data.username}>
 				<div className="section">
 					<div className="col s12">
-						<div className="card horizontal">
+						<div className="user-card card horizontal" data-user={user.username}>
 							<div className="card-stacked">
 								<div className="card-content">
 									<div className="row">
