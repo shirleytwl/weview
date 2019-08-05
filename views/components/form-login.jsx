@@ -11,7 +11,7 @@ class LoginForm extends React.Component {
 						</div>
 						<div className="input-field col s12">
 							<input type="text" className="form-username validate"/>
-								<label htmlFor="email">Username</label>
+							<label htmlFor="email">Username</label>
 						</div>
 						<div className="input-field col s12">
 							<input type="password" className="form-password validate"/>

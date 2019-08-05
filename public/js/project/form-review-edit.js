@@ -111,7 +111,7 @@ const submitEdit = (review_id) => {
 	};
 	let reviewReq = new XMLHttpRequest();   // new HttpRequest instance
 	reviewReq.addEventListener("load", function(){
-		if (this.status === 201) {
+		if (this.status === 200) {
 			location.reload();
 		}
 		else {
