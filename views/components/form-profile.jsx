@@ -12,11 +12,11 @@ class ProfileForm extends React.Component {
 						</div>
 						<div className="input-field col s6">
 							<input type="password" className="form-password-old validate"/>
-							<label htmlFor="password-old">Old Password</label>
+							<label className="password-old-label" htmlFor="password-old">Old Password</label>
 						</div>
 						<div className="input-field col s6">
 							<input type="password" className="form-password-new validate" disabled/>
-							<label htmlFor="password-new">New Password</label>
+							<label className="password-new-label" htmlFor="password-new">New Password</label>
 						</div>
 					</div>
 					<div className="row">

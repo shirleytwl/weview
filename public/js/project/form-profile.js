@@ -2,9 +2,9 @@ var profToastCurrentlyDisplayed = false;
 document.addEventListener('DOMContentLoaded',function () {
 	let profileButton = document.querySelector('.btn-profile');
 	let pfButton = document.querySelector('#form-profile .btn-submit');
-	let pfUsername = document.querySelector('#form-profile .form-username');
 	let pfPasswordOld = document.querySelector('#form-profile .form-password-old');
 	let pfPasswordNew = document.querySelector('#form-profile .form-password-new');
+	let passwordNewLabel = document.querySelector('#form-profile .password-new-label');
 	let imageInput = document.querySelector('#form-profile .form-profile-image');
 	let delPassword = document.querySelector("#confirm-delete-modal .form-password-del");
 	let delButton = document.querySelector('#confirm-delete-modal .btn-confirm-delete');
@@ -13,13 +13,14 @@ document.addEventListener('DOMContentLoaded',function () {
 		showUserInfo(user_id);
 	});
 	pfPasswordOld.addEventListener('keyup',function (event){
-		if (pfPasswordOld.value.trim() !== "") {
+		if (pfPasswordOld.value.trim() != "") {
 			pfPasswordNew.disabled = false;
 		}
 		else {
 			pfPasswordNew.disabled = true;
 			pfPasswordNew.value = "";
 			pfPasswordNew.classList.remove('valid');
+			passwordNewLabel.classList.remove('active');
 			if (!imageInput.value) {
 				pfButton.disabled = true;
 			}
@@ -30,14 +31,23 @@ document.addEventListener('DOMContentLoaded',function () {
 			pfButton.disabled = false;
 		}
 		else {
-			if (!imageInput.value) {
+			if (imageInput.value === "") {
 				pfButton.disabled = true;
 			}
 		}
 	});
 	imageInput.addEventListener('change', function(event){
-		if (pfPasswordOld.value.trim() !== "") {
-			pfPasswordNew.disabled = false;
+		var preview = document.querySelector('.form-image-preview');
+		var file    = document.querySelector('input[type=file].form-profile-image').files[0];
+		var reader  = new FileReader();
+
+		reader.addEventListener("load", function () {
+			preview.src = reader.result;
+		}, false);
+
+		if (file) {
+			reader.readAsDataURL(file);
+			pfButton.disabled = false;
 		}
 	});
 

@@ -2,7 +2,6 @@ $(document).ready(function(){
 	$('select').formSelect();
 	const urlParams = new URLSearchParams(window.location.search);
 	const sortby = urlParams.get("sortby");
-	console.log(sortby);
 	$("#sortby option[value='"+sortby+"']").prop('selected', true);
 
 	let categoryId = $('#category-title').data('category');
