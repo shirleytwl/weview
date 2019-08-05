@@ -26,8 +26,8 @@ module.exports = (dbPoolInstance) => {
 
     let addUser = (username,password, callback) => {
 
-        let query = 'INSERT INTO Users(username,password) VALUES($1,$2) RETURNING username, id';
-        let values = [username,password];
+        let query = 'INSERT INTO Users(username,password,image) VALUES($1,$2,$3) RETURNING username, id';
+        let values = [username,password, 'https://res.cloudinary.com/shirleytwl/image/upload/v1564912110/default_mqpdtr.png'];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
                 callback(error, null);
