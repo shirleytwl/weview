@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded',function () {
 	let stepper = document.querySelector('#add-review-form');
 	let submitButton = document.querySelector('#add-review-form .btn-submit');
 	let newButton = document.querySelector('.btn-new');
-	let channelRating = document.querySelector('#add-review-form #channel_rating');
+	let channelRating = document.querySelector('#add-review-form .channel_rating');
 	let channelRatingText = document.querySelector('#add-review-form .rating-score span');
 	let youtube_id = document.querySelector('.btn-new').dataset.channel;
 	editStepperInstance = new MStepper(stepper, {
@@ -68,16 +68,16 @@ function reviewOverview (destroyFeedback, form, activeStepContent) {
 	let catEl = activeStepContent.querySelector('#add-review-form .step-1 .channel-categories');
 	let imgEl = activeStepContent.querySelector('#add-review-form .step-1 .channel-thumbnail');
 	let scoreEl = activeStepContent.querySelector("#add-review-form .rating-score span");
-	let ratingEl = activeStepContent.querySelector("#add-review-form #channel_rating");
-	let reviewEl = activeStepContent.querySelector("#add-review-form #channel_review");
+	let ratingEl = activeStepContent.querySelector("#add-review-form .channel_rating");
+	let reviewEl = activeStepContent.querySelector("#add-review-form .channel_review");
 
 	let overviewName = document.querySelector('#add-review-form .step-2 .channel-name');
 	let overviewCat = document.querySelector('#add-review-form .step-2 .channel-categories');
 	let overviewImg = document.querySelector('#add-review-form .step-2 .channel-thumbnail');
 	let overviewScore = document.querySelector("#add-review-form .overview-score span");
-	let overviewRating = document.querySelector("#add-review-form #overview_rating");
-	let overviewReview = document.querySelector("#add-review-form #overview_review");
-	let overviewReviewLabel = document.querySelector("#add-review-form #overview_review_label");
+	let overviewRating = document.querySelector("#add-review-form .overview_rating");
+	let overviewReview = document.querySelector("#add-review-form .overview_review");
+	let overviewReviewLabel = document.querySelector("#add-review-form .overview_review_label");
 
 	overviewName.innerHTML = nameEl.innerHTML;
 	overviewCat.innerHTML = catEl.innerHTML;
@@ -92,8 +92,8 @@ function reviewOverview (destroyFeedback, form, activeStepContent) {
 
 const submitReview = () => {
 	let reviewData = {
-		review: document.querySelector("#add-review-form #overview_review").value,
-		rating: document.querySelector("#add-review-form #overview_rating").value,
+		review: document.querySelector("#add-review-form .overview_review").value,
+		rating: document.querySelector("#add-review-form .overview_rating").value,
 	};
 	let reviewReq = new XMLHttpRequest();   // new HttpRequest instance
 	reviewReq.addEventListener("load", function(){

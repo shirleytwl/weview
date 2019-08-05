@@ -123,7 +123,9 @@ module.exports = (db) => {
         db.user.getUser(user,(error, callback) => {
             if (callback) {
                 data.user = callback;
-                db.review.getReviewsByUser(data.user.id,(error, callback) => {
+                let sortby = 'desc';
+                if (req.query.sortby) sortby = req.query.sortby;
+                db.review.getReviewsByUser(data.user.id, sortby,(error, callback) => {
                     data.user.reviews = callback;
                     res.render('user', {data});
                 });

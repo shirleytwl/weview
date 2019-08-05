@@ -37,8 +37,21 @@ module.exports = (dbPoolInstance) => {
             }
         });
     };
-    let getReviewsByChannel = (channel_id, callback) => {
-        let query = 'SELECT reviews.id AS review_id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date_created, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, Users.id, Users.username, Users.image FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id';
+    let getReviewsByChannel = (channel_id, sortby, callback) => {
+        let query = 'SELECT reviews.id AS review_id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, Users.id, Users.username, Users.image FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id ORDER BY date_created DESC';
+        if (sortby === 'htl') {
+            query = 'SELECT reviews.id AS review_id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, Users.id, Users.username, Users.image FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id ORDER BY rating DESC';
+        }
+        else if (sortby === 'lth') {
+            query = 'SELECT reviews.id AS review_id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, Users.id, Users.username, Users.image FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id ORDER BY rating ASC';
+
+        }
+        else if (sortby === 'desc') {
+            query = 'SELECT reviews.id AS review_id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, Users.id, Users.username, Users.image FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id ORDER BY date_created DESC';
+        }
+        else if (sortby === 'asc') {
+            query = 'SELECT reviews.id AS review_id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date, TO_CHAR(reviews.date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, Users.id, Users.username, Users.image FROM Reviews INNER JOIN Users ON (Reviews.user_id=Users.id) WHERE $1=channel_id ORDER BY date_created ASC';
+        }
         let values = [channel_id];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
@@ -53,8 +66,21 @@ module.exports = (dbPoolInstance) => {
         });
     };
 
-    let getReviewsByUser = (user_id, callback) => {
-        let query = 'SELECT reviews.id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date_created, TO_CHAR(date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, channels.name, channels.youtube_id, channels.link, channels.thumbnail_url FROM Reviews INNER JOIN Channels ON (Reviews.channel_id=Channels.id) WHERE $1=user_id';
+    let getReviewsByUser = (user_id, sortby, callback) => {
+        let query = 'SELECT reviews.id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date, TO_CHAR(date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, channels.name, channels.youtube_id, channels.link, channels.thumbnail_url FROM Reviews INNER JOIN Channels ON (Reviews.channel_id=Channels.id) WHERE $1=user_id ORDER BY date_created DESC';
+        if (sortby === 'htl') {
+            query = 'SELECT reviews.id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date, TO_CHAR(date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, channels.name, channels.youtube_id, channels.link, channels.thumbnail_url FROM Reviews INNER JOIN Channels ON (Reviews.channel_id=Channels.id) WHERE $1=user_id ORDER BY rating DESC';
+        }
+        else if (sortby === 'lth') {
+            query = 'SELECT reviews.id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date, TO_CHAR(date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, channels.name, channels.youtube_id, channels.link, channels.thumbnail_url FROM Reviews INNER JOIN Channels ON (Reviews.channel_id=Channels.id) WHERE $1=user_id ORDER BY rating ASC';
+
+        }
+        else if (sortby === 'desc') {
+            query = 'SELECT reviews.id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date, TO_CHAR(date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, channels.name, channels.youtube_id, channels.link, channels.thumbnail_url FROM Reviews INNER JOIN Channels ON (Reviews.channel_id=Channels.id) WHERE $1=user_id ORDER BY date_created DESC';
+        }
+        else if (sortby === 'asc') {
+            query = 'SELECT reviews.id, reviews.content, TO_CHAR(reviews.date_created :: DATE, \'dd Month yyyy\') AS date, TO_CHAR(date_edited :: DATE, \'dd Month yyyy\') AS date_edited, reviews.edited, reviews.rating, reviews.channel_id, channels.name, channels.youtube_id, channels.link, channels.thumbnail_url FROM Reviews INNER JOIN Channels ON (Reviews.channel_id=Channels.id) WHERE $1=user_id ORDER BY date_created ASC';
+        }
         let values = [user_id];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {

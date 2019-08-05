@@ -53,8 +53,9 @@ module.exports = (db) => {
                 db.channel.getCategoriesByChannel(data.channel.id,(error, callback) => {
                     if (callback) {
                         data.channel.categories = callback;
-
-                        db.review.getReviewsByChannel(data.channel.id,(error, callback) => {
+                        let sortby = 'desc';
+                        if (req.query.sortby) sortby = req.query.sortby;
+                        db.review.getReviewsByChannel(data.channel.id, sortby,(error, callback) => {
                             if (callback) {
                                 data.channel.reviews = callback;
                                 res.render('channel', {data});

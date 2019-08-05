@@ -131,6 +131,7 @@ nav ul a:hover {
 }
 
 input[type=text].form-username:disabled,
+textarea.materialize-textarea:disabled,
 .overview_review:disabled,
 .channel_review:disabled{
     color: #333;
@@ -204,4 +205,8 @@ h4.title {
 }
 #confirm-delete-modal .input-field {
     margin: 3rem 0;
+}
+
+.review-sorting {
+    margin-top:-1rem;
 }

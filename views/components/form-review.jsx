@@ -24,14 +24,14 @@ class ChannelForm extends React.Component {
 								</div>
 								<div className="col s10">
 									<p className="range-field">
-										<input name="channel_rating" type="range" id="channel_rating" min="0" max="5" value="0"/>
+										<input name="channel_rating" type="range" className="channel_rating" min="0" max="5" value="0"/>
 									</p>
 								</div>
 							</div>
 							<div className="row">
 								<div className="input-field col s12">
-									<textarea id="channel_review" name="channel_review" className="materialize-textarea validate" required></textarea>
-									<label id="channel_review_label" htmlFor="channel_review">Write your review here</label>
+									<textarea name="channel_review" className="channel_review materialize-textarea validate" required></textarea>
+									<label className="channel_review_label" htmlFor="channel_review">Write your review here</label>
 								</div>
 							</div>
 							<div className="step-actions">
@@ -58,14 +58,14 @@ class ChannelForm extends React.Component {
 								</div>
 								<div className="col s10">
 									<p className="range-field">
-										<input name="channel_rating" type="range" id="overview_rating" min="0" max="5" disabled/>
+										<input name="channel_rating" type="range" className="overview_rating" min="0" max="5" disabled/>
 									</p>
 								</div>
 							</div>
 							<div className="row">
 								<div className="input-field col s12">
-									<textarea id="overview_review" name="overview_review" className="materialize-textarea validate" disabled></textarea>
-									<label id="overview_review_label" htmlFor="overview_review">Review</label>
+									<textarea name="overview_review" className="overview_review materialize-textarea validate" disabled></textarea>
+									<label className="overview_review_label" htmlFor="overview_review">Review</label>
 								</div>
 							</div>
 							<div className="step-actions">

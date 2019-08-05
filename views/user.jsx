@@ -74,7 +74,7 @@ class Home extends React.Component {
 								</div>
 								<div className="row">
 									<div className="col s2">
-										<p>{review.date_created}</p>
+										<p>{review.date}</p>
 									</div>
 									{buttonTools}
 								</div>
@@ -116,41 +116,57 @@ class Home extends React.Component {
 			}
 		}
 		return (
-			<DefaultLayout username={this.props.data.username}>
-				<div className="section">
-					<div className="col s12">
-						<div className="user-card card horizontal" data-user={user.username}>
-							<div className="card-stacked">
-								<div className="card-content">
-									<div className="row">
-										<div className="col s2">
-											<img className="responsive-img" src={user.image}/>
-										</div>
-										<div className="col s9">
-											<span className="card-title">{user.username}</span>
-											<p>Date Joined: {user.date_joined}</p>
-										</div>
-										<div className="col s1 right-align">
-											{profileButton}
+			<React.Fragment>
+				<DefaultLayout username={this.props.data.username}>
+					<div className="section">
+						<div className="col s12">
+							<div className="user-card card horizontal" data-user={user.username}>
+								<div className="card-stacked">
+									<div className="card-content">
+										<div className="row">
+											<div className="col s2">
+												<img className="responsive-img" src={user.image}/>
+											</div>
+											<div className="col s9">
+												<span className="card-title">{user.username}</span>
+												<p>Date Joined: {user.date_joined}</p>
+											</div>
+											<div className="col s1 right-align">
+												{profileButton}
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div className="section">
-					<div className="col s12">
-						<h4>{reviewTitle}</h4>
-						<div className="row">
-							{reviews}
+					<div className="section">
+						<div className="col s12">
+							<div className="row valign-wrapper">
+								<div className="col s9">
+									<h4 className="review-title">{reviewTitle}</h4>
+								</div>
+								<div className="col s3">
+									<label>Sort by</label>
+									<select id="sortby" name="sortby" className="browser-default">
+										<option className="desc" value="desc">Latest Reviews</option>
+										<option className="asc" value="asc">Earliest Reviews</option>
+										<option className="htl" value="htl">Rating (high to low)</option>
+										<option className="lth" value="lth">Rating (low to high)</option>
+									</select>
+								</div>
+							</div>
+							<div className="row">
+								{reviews}
+							</div>
 						</div>
+						{profileModal}
+						{editModal}
+						{deleteModal}
 					</div>
-					{profileModal}
-					{editModal}
-					{deleteModal}
-				</div>
-			</DefaultLayout>
+				</DefaultLayout>
+				<script src="/js/project/user-review-sorting.js"/>
+			</React.Fragment>
 		);
 	}
 }

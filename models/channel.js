@@ -6,7 +6,7 @@
 module.exports = (dbPoolInstance) => {
     let addChannel = (channel_info, callback) => {
         let query = 'WITH S AS ( SELECT id FROM Channels WHERE youtube_id = $1), I AS ( INSERT INTO Channels (name, youtube_id, thumbnail_url, link) SELECT $2,$3,$4,$5 WHERE NOT EXISTS (SELECT 1 FROM S) RETURNING id) SELECT id FROM I UNION ALL SELECT id FROM S;';
-        let values = [channel_info.id,channel_info.name,channel_info.id,channel_info.thumbnail,channel_info.link];
+        let values = [channel_info.id,channel_info.name,channel_info.id,channel_info.thumbnail,'https://www.youtube.com/channel/'+channel_info.id];
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {
                 callback(error, null);

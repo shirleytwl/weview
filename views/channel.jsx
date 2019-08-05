@@ -16,7 +16,7 @@ class Home extends React.Component {
 		let reviews = channel.reviews.map((review)=>{
 			let link = '/users/'+review.username;
 			if (review.edited) {
-				review.date_created += " (edited)";
+				review.date += " (edited)";
 			}
 			let buttonTools = '';
 			if (this.props.data.username) {
@@ -69,7 +69,7 @@ class Home extends React.Component {
 							</div>
 							<div className="row">
 								<div className="col s12 m2">
-									<p>Posted on {review.date_created}</p>
+									<p>Posted on {review.date}</p>
 								</div>
 								{buttonTools}
 							</div>
@@ -86,48 +86,62 @@ class Home extends React.Component {
 			reviewTitle = `Reviews (${channel.numreviews})`;
 		}
 		return (
-			<DefaultLayout username={this.props.data.username}>
-				<div className="section">
-					<div className="col s12">
-						<div className="channel-overview card horizontal">
-							<div className="card-stacked">
-								<div className="card-content">
-									<div className="row">
-										<div className="col s2">
-											<img className="responsive-img" src={channel.thumbnail_url}/>
-										</div>
-										<div className="col s8">
-											<span className="card-title">{channel.name}</span>
-											{categories}
-										</div>
-										<div className="col s2">
-											<h4 className="review-rating"><span className="score">{channel.rating}</span><span className="slash">╱</span><span className="total-score">5</span></h4>
+			<React.Fragment>
+					<DefaultLayout username={this.props.data.username}>
+					<div className="section">
+						<div className="col s12">
+							<div className="channel-overview card horizontal">
+								<div className="card-stacked">
+									<div className="card-content">
+										<div className="row">
+											<div className="col s2">
+												<img className="responsive-img" src={channel.thumbnail_url}/>
+											</div>
+											<div className="col s8">
+												<span className="card-title">{channel.name}</span>
+												{categories}
+											</div>
+											<div className="col s2">
+												<h4 className="review-rating"><span className="score">{channel.rating}</span><span className="slash">╱</span><span className="total-score">5</span></h4>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div className="card-action right-align">
-									<a href={channel.link} target="_blank" className="materialize-red-text">Visit Channel in YouTube</a>
+									<div className="card-action right-align">
+										<a href={channel.link} target="_blank" className="materialize-red-text">Visit Channel in YouTube</a>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div className="section">
-					<div className="row valign-wrapper">
-						<div className="col s6">
-							<h4 className="review-title">{reviewTitle}</h4>
+					<div className="section">
+						<div className="row valign-wrapper">
+							<div className="col s6">
+								<h4 className="review-title">{reviewTitle}</h4>
+							</div>
+							<div className="col s3 right-align">
+								<ReviewModal username={this.props.data.username} channel={channel.youtube_id}/>
+							</div>
+							<div className="col s3">
+								<div className="review-sorting">
+									<label>Sort by</label>
+									<select id="sortby" name="sortby" className="browser-default">
+										<option className="desc" value="desc">Latest Reviews</option>
+										<option className="asc" value="asc">Earliest Reviews</option>
+										<option className="htl" value="htl">Rating (high to low)</option>
+										<option className="lth" value="lth">Rating (low to high)</option>
+									</select>
+								</div>
+							</div>
 						</div>
-						<div className="col s6 right-align">
-							<ReviewModal username={this.props.data.username} channel={channel.youtube_id}/>
+						<div className="row">
+							{reviews}
 						</div>
+						{editModal}
+						{deleteModal}
 					</div>
-					<div className="row">
-						{reviews}
-					</div>
-					{editModal}
-					{deleteModal}
-				</div>
-			</DefaultLayout>
+				</DefaultLayout>
+				<script src="/js/project/channel-review-sorting.js"/>
+			</React.Fragment>
 		);
 	}
 }
