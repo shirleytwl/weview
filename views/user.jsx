@@ -11,80 +11,95 @@ class Home extends React.Component {
 		let profileButton = '';
 		let editModal = '';
 		let deleteModal = '';
-		let reviews = user.reviews.map((review)=>{
-			let link = '/channels/'+review.youtube_id;
-			let userLink = '/users/'+user.username;
-			if (review.edited) {
-				review.date_created += " (edited)";
-			}
-			let buttonTools = '';
-			if (this.props.data.username){
-				if (user.username.toLowerCase() === this.props.data.username.toLowerCase()) {
-					buttonTools = <div className="col s10 right-align">
-						<a className="btn-edit waves-effect waves-light btn modal-trigger" href="#edit-modal"
-						   data-review={review.id}>
-							<i className="material-icons">edit</i>
-						</a>
-						<a className="btn-delete waves-effect waves-light btn modal-trigger" href="#delete-modal"
-						   data-review={review.id}>
-							<i className="material-icons">delete</i>
-						</a>
-					</div>;
-					if (editModal === '') {
-						editModal = <div id="edit-modal" className="modal">
-							<div className="modal-content">
-								<h4>Edit channel review</h4>
-								<EditForm/>
+		let reviews = '';
+		if (user.reviews) {
+			 reviews = user.reviews.map((review) => {
+				let link = '/channels/' + review.youtube_id;
+				let userLink = '/users/' + user.username;
+				if (review.edited) {
+					review.date_created += " (edited)";
+				}
+				let buttonTools = '';
+				if (this.props.data.username) {
+					if (user.username.toLowerCase() === this.props.data.username.toLowerCase()) {
+						buttonTools = <div className="col s10 right-align">
+							<a className="btn-edit waves-effect waves-light btn modal-trigger" href="#edit-modal"
+							   data-review={review.id}>
+								<i className="material-icons">edit</i>
+							</a>
+							<a className="btn-delete waves-effect waves-light btn modal-trigger" href="#delete-modal"
+							   data-review={review.id}>
+								<i className="material-icons">delete</i>
+							</a>
+						</div>;
+						if (editModal === '') {
+							editModal = <div id="edit-modal" className="modal">
+								<div className="modal-content">
+									<h4>Edit channel review</h4>
+									<EditForm/>
+								</div>
 							</div>
-						</div>
-					}
-					if (deleteModal === '') {
-						deleteModal = <div id="delete-modal" className="modal">
-							<div className="modal-content">
-								<h4>Delete channel review</h4>
-								<DeleteForm/>
+						}
+						if (deleteModal === '') {
+							deleteModal = <div id="delete-modal" className="modal">
+								<div className="modal-content">
+									<h4>Delete channel review</h4>
+									<DeleteForm/>
+								</div>
 							</div>
-						</div>
+						}
 					}
 				}
-			}
-			return (
-				<div className="col s12">
-					<div className="card review-card">
-						<div className="card-content">
-							<div className="row">
-								<div className="col s2">
-									<a href={link}>
-										<img src={review.thumbnail_url}
-										     className="responsive-img"/>
-										<p className="center-align">{review.name}</p>
-									</a>
+				return (
+					<div className="col s12">
+						<div className="card review-card">
+							<div className="card-content">
+								<div className="row">
+									<div className="col s2">
+										<a href={link}>
+											<img src={review.thumbnail_url}
+											     className="responsive-img"/>
+											<p className="center-align">{review.name}</p>
+										</a>
+									</div>
+									<div className="col s8">
+										<a href={userLink}><span className="card-title">{user.username}</span></a>
+										<p>{review.content}</p>
+									</div>
+									<div className="col s2">
+										<h5 className="review-rating"><span
+											className="score">{review.rating}</span><span
+											className="slash">╱</span><span className="total-score">5</span></h5>
+									</div>
 								</div>
-								<div className="col s8">
-									<a href={userLink}><span className="card-title">{user.username}</span></a>
-									<p>{review.content}</p>
+								<div className="row">
+									<div className="col s2">
+										<p>{review.date_created}</p>
+									</div>
+									{buttonTools}
 								</div>
-								<div className="col s2">
-									<h5 className="review-rating"><span className="score">{review.rating}</span><span className="slash">╱</span><span className="total-score">5</span></h5>
-								</div>
-							</div>
-							<div className="row">
-								<div className="col s2">
-									<p>{review.date_created}</p>
-								</div>
-								{buttonTools}
 							</div>
 						</div>
 					</div>
-				</div>
-			)
-		});
-		let reviewTitle = "";
-		if (reviews.length <= 1) {
-			reviewTitle = `Review posted (${reviews.length})`;
+				)
+			});
+		}
+		let reviewTitle = "Review posted (0)";
+		if (reviews) {
+			if (reviews.length <= 1) {
+				reviewTitle = `Review posted (${reviews.length})`;
+			} else {
+				reviewTitle = `Reviews posted (${reviews.length})`;
+			}
 		}
 		else {
-			reviewTitle = `Reviews posted (${reviews.length})`;
+			reviews = <div className="col s12">
+				<div className="card review-card">
+					<div className="card-content">
+						<p>This user has not posted any review.</p>
+					</div>
+				</div>
+			</div>;
 		}
 		if (this.props.data.username){
 			if (user.username.toLowerCase() === this.props.data.username.toLowerCase()) {

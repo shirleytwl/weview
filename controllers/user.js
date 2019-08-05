@@ -124,10 +124,8 @@ module.exports = (db) => {
             if (callback) {
                 data.user = callback;
                 db.review.getReviewsByUser(data.user.id,(error, callback) => {
-                    if (callback) {
-                        data.user.reviews = callback;
-                        res.render('user', {data});
-                    }
+                    data.user.reviews = callback;
+                    res.render('user', {data});
                 });
             }
         });
