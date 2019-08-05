@@ -21,7 +21,7 @@ class Home extends React.Component {
 			let buttonTools = '';
 			if (this.props.data.username) {
 				if (review.username.toLowerCase() === this.props.data.username.toLowerCase()) {
-					buttonTools = <div className="col s10 right-align">
+					buttonTools = <div className="col s12 m10 right-align">
 						<a className="btn-edit waves-effect waves-light btn modal-trigger" href="#edit-modal"
 						   data-channel={review.channel_id} data-review={review.review_id}>
 							<i className="material-icons">edit</i>
@@ -54,22 +54,24 @@ class Home extends React.Component {
 					<div className="card review-card">
 						<div className="card-content">
 							<div className="row">
-								<div className="col s12 m2">
+								<div className="col s4 m2">
 									<a href={link}>
 										<img src={review.image} className="responsive-img"/>
 									</a>
 								</div>
-								<div className="col s12 m8">
+								<div className="col s5 m8">
 									<a href={link}><span className="card-title">{review.username}</span></a>
-									<p>{review.content}</p>
+									<p className="hide-on-small-and-down">{review.content}</p>
+									<p className="hide-on-med-and-up">Posted on {review.date}</p>
 								</div>
-								<div className="col s12 m2">
+								<div className="col s3 m2">
 									<h5 className="review-rating"><span className="score">{review.rating}</span><span className="slash">╱</span><span className="total-score">5</span></h5>
 								</div>
 							</div>
 							<div className="row">
 								<div className="col s12 m2">
-									<p>Posted on {review.date}</p>
+									<p className="hide-on-med-and-up">{review.content}</p>
+									<p className="hide-on-small-and-down">Posted on {review.date}</p>
 								</div>
 								{buttonTools}
 							</div>
@@ -94,14 +96,17 @@ class Home extends React.Component {
 								<div className="card-stacked">
 									<div className="card-content">
 										<div className="row">
-											<div className="col s2">
+											<div className="col s6 m2">
 												<img className="responsive-img" src={channel.thumbnail_url}/>
 											</div>
-											<div className="col s8">
+											<div className="col s6 hide-on-med-and-up">
+												<h4 className="review-rating"><span className="score">{channel.rating}</span><span className="slash">╱</span><span className="total-score">5</span></h4>
+											</div>
+											<div className="col s12 m8">
 												<span className="card-title">{channel.name}</span>
 												{categories}
 											</div>
-											<div className="col s2">
+											<div className="col s2 hide-on-small-and-down">
 												<h4 className="review-rating"><span className="score">{channel.rating}</span><span className="slash">╱</span><span className="total-score">5</span></h4>
 											</div>
 										</div>
@@ -114,14 +119,14 @@ class Home extends React.Component {
 						</div>
 					</div>
 					<div className="section">
-						<div className="row valign-wrapper">
-							<div className="col s6">
+						<div className="row">
+							<div className="col s12 m6">
 								<h4 className="review-title">{reviewTitle}</h4>
 							</div>
-							<div className="col s3 right-align">
+							<div className="col s6 m3 right-align">
 								<ReviewModal username={this.props.data.username} channel={channel.youtube_id}/>
 							</div>
-							<div className="col s3">
+							<div className="col s6 m3">
 								<div className="review-sorting">
 									<label>Sort by</label>
 									<select id="sortby" name="sortby" className="browser-default">

@@ -22,7 +22,7 @@ class Home extends React.Component {
 				let buttonTools = '';
 				if (this.props.data.username) {
 					if (user.username.toLowerCase() === this.props.data.username.toLowerCase()) {
-						buttonTools = <div className="col s10 right-align">
+						buttonTools = <div className="col s12 m10 right-align">
 							<a className="btn-edit waves-effect waves-light btn modal-trigger" href="#edit-modal"
 							   data-review={review.id}>
 								<i className="material-icons">edit</i>
@@ -55,18 +55,19 @@ class Home extends React.Component {
 						<div className="card review-card">
 							<div className="card-content">
 								<div className="row">
-									<div className="col s2">
+									<div className="col s4 m2">
 										<a href={link}>
 											<img src={review.thumbnail_url}
 											     className="responsive-img"/>
 											<p className="center-align">{review.name}</p>
 										</a>
 									</div>
-									<div className="col s8">
+									<div className="col s5 m8">
 										<a href={userLink}><span className="card-title">{user.username}</span></a>
-										<p>{review.content}</p>
+										<p className="hide-on-small-and-down">{review.content}</p>
+										<p className="hide-on-med-and-up">Posted on {review.date}</p>
 									</div>
-									<div className="col s2">
+									<div className="col s3 m2">
 										<h5 className="review-rating"><span
 											className="score">{review.rating}</span><span
 											className="slash">╱</span><span className="total-score">5</span></h5>
@@ -74,7 +75,8 @@ class Home extends React.Component {
 								</div>
 								<div className="row">
 									<div className="col s2">
-										<p>{review.date}</p>
+										<p className="hide-on-med-and-up">{review.content}</p>
+										<p className="hide-on-small-and-down">Posted on {review.date}</p>
 									</div>
 									{buttonTools}
 								</div>
@@ -124,15 +126,21 @@ class Home extends React.Component {
 								<div className="card-stacked">
 									<div className="card-content">
 										<div className="row">
-											<div className="col s2">
+											<div className="col s6 m2">
 												<img className="responsive-img" src={user.image}/>
 											</div>
-											<div className="col s9">
+											<div className="col s6 m9 hide-on-small-and-down">
 												<span className="card-title">{user.username}</span>
 												<p>Date Joined: {user.date_joined}</p>
 											</div>
-											<div className="col s1 right-align">
+											<div className="col s6 m1 right-align">
 												{profileButton}
+											</div>
+										</div>
+										<div className="row hide-on-med-and-up">
+											<div className="col s12">
+												<span className="card-title">{user.username}</span>
+												<p>Date Joined: {user.date_joined}</p>
 											</div>
 										</div>
 									</div>
@@ -142,11 +150,11 @@ class Home extends React.Component {
 					</div>
 					<div className="section">
 						<div className="col s12">
-							<div className="row valign-wrapper">
-								<div className="col s9">
+							<div className="row">
+								<div className="col s12 m9">
 									<h4 className="review-title">{reviewTitle}</h4>
 								</div>
-								<div className="col s3">
+								<div className="col s12 m3">
 									<label>Sort by</label>
 									<select id="sortby" name="sortby" className="browser-default">
 										<option className="desc" value="desc">Latest Reviews</option>

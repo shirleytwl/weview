@@ -5,7 +5,7 @@ class ChannelCard extends React.Component {
 		let channel = this.props.channel;
 		let link = "/channels/"+channel.youtube_id;
 		return (
-			<div className="col s6 m4 channel-card">
+			<div className="col s12 m4 channel-card">
 				<a href={link}>
 					<div className="card">
 						<div className="card-image">

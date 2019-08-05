@@ -18,10 +18,10 @@ class Home extends React.Component {
 							</div>
 							<div className="col s12">
 								<div className="row">
-									<div className="col s9">
+									<div className="col s12 m9">
 										<h4 id="category-title" className="title" data-category={this.props.category.id}>{this.props.category.name.split("_").join(" ")} </h4>
 									</div>
-									<div className="col s3">
+									<div className="col s12 m3">
 										<label>Sort by</label>
 										<select id="sortby" name="sortby" className="browser-default">
 											<option className="htl" value="htl">Rating (high to low)</option>

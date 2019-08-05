@@ -210,3 +210,28 @@ h4.title {
 .review-sorting {
     margin-top:-1rem;
 }
+
+.review-title {
+    margin-top: 0.666rem;
+}
+.btn-new {
+    margin-top: 0.75rem;
+}
+
+.sidenav-overlay {
+    z-index: 1;
+}
+
+@media only screen and (max-width: 600px){
+    .side-nav {
+        position: static;
+        z-index: 9;
+    }
+    .review-sorting {
+        margin-top: 0.5rem;
+    }
+    .btn-new {
+        margin-top: 2.175rem;
+        width: 100%;
+    }
+}

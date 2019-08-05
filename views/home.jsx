@@ -33,13 +33,13 @@ class Home extends React.Component {
 					<div className="row">
 						<div className="col s2 side-nav">
 							<ChannelModal username={this.props.username}/>
-							<div class="card sidenav-items">
+							<div class="card sidenav-items hide-on-small-only">
 								<div class="card-content">
 									{sideNav}
 								</div>
 							</div>
 						</div>
-						<div className="col s9 offset-s3">
+						<div className="col m9 offset-m3">
 							{categories}
 						</div>
 					</div>
