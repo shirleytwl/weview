@@ -234,4 +234,21 @@ h4.title {
         margin-top: 2.175rem;
         width: 100%;
     }
+    .channel-categories .btn {
+        width: 100%;
+        height: auto;
+        font-size: 0.6666rem;
+        margin-bottom: 0.5rem;
+    }
+    ul.stepper .step .step-content .step-actions button{
+        width: 100%;
+    }
+    ul.stepper .step .step-content .step-actions {
+        flex-direction: column;
+    }
+}
+
+ul.stepper .step.active .step-content{
+    overflow: visible!important;
+    height: auto!important;
 }
