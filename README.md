@@ -43,7 +43,6 @@ A review site for YouTube Channels.
 - [ ] Users can follow other users
   
 ---
-  
-  
-###Check out the website here:  
+
+### Check out the website here:  
 https://yt-weview.herokuapp.com/
