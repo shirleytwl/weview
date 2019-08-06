@@ -17,23 +17,24 @@ A review site for YouTube Channels.
 ### Approach and Process
 
 #### Entity Relationship Diagram
-![alt text](https://i.imgur.com/sSGjuUA.png "ERD")
+<img src="https://i.imgur.com/sSGjuUA.jpg " width="50%">
 
 ### Wireframing
 
 ##### Home Page
-![alt text](https://i.imgur.com/D1xi7Ul.jpg "Home Page")
+<img src="https://i.imgur.com/D1xi7Ul.jpg " width="50%">
 
 ##### Categories Page
-![alt text](https://i.imgur.com/VffzvGA.jpg "Categories Page")
+<img src="https://i.imgur.com/VffzvGA.jpg " width="50%">
 
 ##### Channel Page
-![alt text](https://imgur.com/CUGcx29.jpg "Channel Page")
+<img src="https://i.imgur.com/CUGcx29.jpg " width="50%">
 
 ##### Add Review Modal
-![alt text](https://i.imgur.com/EEGNImW.jpg "Add Review Modal")
+<img src="https://i.imgur.com/EEGNImW.jpg " width="50%">
 
 ---
+
 ### Future features to add in
 
 - [ ] Update Username
