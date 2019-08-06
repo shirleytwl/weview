@@ -31,7 +31,7 @@ class Home extends React.Component {
 			<DefaultLayout username={this.props.username}>
 				<div className="section">
 					<div className="row">
-						<div className="col s2 side-nav">
+						<div className="col s12 m2 side-nav">
 							<ChannelModal username={this.props.username}/>
 							<div class="card sidenav-items hide-on-small-only">
 								<div class="card-content">

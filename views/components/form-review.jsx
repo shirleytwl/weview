@@ -9,20 +9,20 @@ class ChannelForm extends React.Component {
 						<div className="step-title waves-effect waves-dark">Write Review</div>
 						<div className="step-content step-1">
 							<div className="row">
-								<div className="col s2">
+								<div className="col s6 m2">
 									<img className="responsive-img channel-thumbnail"/>
 								</div>
-								<div className="col s10">
+								<div className="col s12 m10">
 									<h5 className="channel-name"></h5>
 									<div className="channel-categories"></div>
 								</div>
 							</div>
 							<div className="row valign-wrapper">
-								<div className="col s2">
+								<div className="col s4 m2">
 									<p className="rating-score" htmlFor="channel_rating">Rating <span className="teal-text">0/5</span></p>
 
 								</div>
-								<div className="col s10">
+								<div className="col s8 m10">
 									<p className="range-field">
 										<input name="channel_rating" type="range" className="channel_rating" min="0" max="5" value="0"/>
 									</p>
@@ -43,10 +43,10 @@ class ChannelForm extends React.Component {
 						<div className="step-title waves-effect waves-dark">Confirm Review</div>
 						<div className="step-content step-2">
 							<div className="row">
-								<div className="col s2">
+								<div className="col s6 m2">
 									<img className="responsive-img channel-thumbnail"/>
 								</div>
-								<div className="col s10">
+								<div className="col s12 m10">
 									<h5 className="channel-name"></h5>
 									<div className="channel-categories"></div>
 								</div>

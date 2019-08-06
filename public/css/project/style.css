@@ -246,6 +246,28 @@ h4.title {
     ul.stepper .step .step-content .step-actions {
         flex-direction: column;
     }
+
+    ul.stepper .previous-step {
+        background-color: #eee;
+        margin-top:1rem;
+    }
+    .channel-overview .card-action {
+        text-align: center;
+    }
+    .channel-overview .card-action a{
+        margin: 0!important;
+    }
+    #profile-modal button {
+        width: 100%;
+    }
+    .btn-prof-delete {
+        margin: 1rem 0 0;
+        width: 100%;
+    }
+    #profile-modal .modal-overlay {
+        top:0!important;
+        display: none;
+    }
 }
 
 ul.stepper .step.active .step-content{

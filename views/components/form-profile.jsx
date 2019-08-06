@@ -10,17 +10,17 @@ class ProfileForm extends React.Component {
 							<input type="text" className="form-username validate" disabled/>
 							<label className="username-label" htmlFor="form-username">Username</label>
 						</div>
-						<div className="input-field col s6">
+						<div className="input-field col s12 m6">
 							<input type="password" className="form-password-old validate"/>
 							<label className="password-old-label" htmlFor="password-old">Old Password</label>
 						</div>
-						<div className="input-field col s6">
+						<div className="input-field col s12 m6">
 							<input type="password" className="form-password-new validate" disabled/>
 							<label className="password-new-label" htmlFor="password-new">New Password</label>
 						</div>
 					</div>
 					<div className="row">
-						<div className="file-field input-field col s10">
+						<div className="file-field input-field col s8 m10">
 							<div className="btn">
 								<span>Upload New Profile Image</span>
 								<input className="form-profile-image" name="profile-image" type="file"/>
@@ -32,7 +32,7 @@ class ProfileForm extends React.Component {
 								<p className="grey-text darken-4">Size limit: 10 MB</p>
 							</div>
 						</div>
-						<div className="col s2">
+						<div className="col s4 m2">
 							<img className="responsive-img form-image-preview" src=""/>
 						</div>
 					</div>
